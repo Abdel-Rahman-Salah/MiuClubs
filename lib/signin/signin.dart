@@ -56,7 +56,7 @@ class Signin extends StatelessWidget {
                           child: Text(
                             "Forgot Password?",
                             style: TextStyle(
-                                color: red.withOpacity(0.7),
+                                color: red.withOpacity(0.75),
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
