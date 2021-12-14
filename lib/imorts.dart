@@ -6,18 +6,27 @@ class Layout extends StatelessWidget {
     return Scaffold(
       drawer: Drawerwidget(),
       appBar: Appbarwidget('clubpage'),
-      bottomSheet: Container(
-        padding: EdgeInsets.only(top: 2),
-        child: Center(
-          child: Text(
-            'hi',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        color: Color.fromRGBO(51, 51, 51, 1.0),
-        width: MediaQuery.of(context).size.width,
-        height: 40,
+      bottomSheet: Footerwidget(),
+    );
+  }
+}
+
+class Footerwidget extends StatelessWidget {
+  const Footerwidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 10, left: 10),
+      child: Text(
+        'CopyRights@Team23',
+        style: TextStyle(color: Colors.white),
       ),
+      color: Color.fromRGBO(51, 51, 51, 1.0),
+      width: MediaQuery.of(context).size.width,
+      height: 40,
     );
   }
 }
