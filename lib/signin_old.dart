@@ -16,19 +16,19 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      bottomSheet: Container(
-       width: 400,
-          height: 50,
-          decoration: new BoxDecoration(
-              color: Colors.black,
-              ),
-       child: Padding(
-         padding: const EdgeInsets.all(17.0),
-         child: Text("CopyRights@",
+      // bottomSheet: Container(
+      //  width: 400,
+      //     height: 50,
+      //     decoration: new BoxDecoration(
+      //         color: Colors.black,
+      //         ),
+      //  child: Padding(
+      //    padding: const EdgeInsets.all(17.0),
+      //    child: Text("CopyRights@",
 
-         style: TextStyle(color: Colors.white),),
-       )
-      ),
+      //    style: TextStyle(color: Colors.white),),
+      //  )
+      // ),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(50.0),
           child: AppBar(
