@@ -20,6 +20,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
         drawer: Drawerwidget(),
         appBar: Appbarwidget('profile'),
+        bottomSheet: Footerwidget(),
         body: ListView(
           padding:
               EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.25),
