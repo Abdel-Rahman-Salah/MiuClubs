@@ -34,7 +34,12 @@ class _MyAppState extends State<MyApp> {
       ),
       body: Column(
         children: [
-          Text("Manage Clubs djdj"),
+          Text("Manage Clubs djdj",
+          style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: clubs.length,
@@ -43,7 +48,7 @@ class _MyAppState extends State<MyApp> {
                   String path = clubs.elementAt(index).logo;
                   print(path);
                   return Container(
-                    color:Colors.grey,
+                    color:Colors.grey[200],
                     // width:MediaQuery.of(context).size.width,
                     // height:MediaQuery.of(context).size.height,
                     child: ListTile(

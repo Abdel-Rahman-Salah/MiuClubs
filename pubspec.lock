@@ -87,7 +87,11 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.12.10"
+=======
+    version: "0.12.11"
+>>>>>>> c5a1cf2f1b80c076b6c692a050c848c9e0422ac2
   mdi:
     dependency: "direct main"
     description:
