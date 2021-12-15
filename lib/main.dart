@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loginsignup/feed.dart';
 import 'package:loginsignup/signup/signup.dart';
 import 'package:loginsignup/imorts.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Layout(),
+      home: Feed(),
     );
   }
 }
