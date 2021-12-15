@@ -23,49 +23,99 @@ class addClubState extends State<addClub> {
     super.dispose();
   }
 
-  void _printLatestValue() {
-    print('text field: ${myController.text}');
-  }
-  //  @override
-  //  void initState(){
-  //    super.initState();
-  //    myController.addListener(_printLatestValue);
-  //  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-            centerTitle: true,
-            title: const Text(
-              'MIU CLUBS',
-              style: TextStyle(color: Colors.red),
-            ),
-            backgroundColor: Colors.black,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0),
+        child: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'MIU CLUBS',
+            style: TextStyle(color: Colors.red),
           ),
+          backgroundColor: Colors.black,
         ),
-        body: Center(
-            child: Container(
-          padding: const EdgeInsets.fromLTRB(15.0, 50.0, 20.0, 15.0),
-          width: 285,
-          height: 750,
-          decoration: new BoxDecoration(
-              color: Colors.grey.withOpacity(0.5),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: Column(
+      ),
+      body: ListView(
+        children: <Widget>[
+          Column(
             children: [
-              SizedBox(
-                height: 57,
-                width: 650,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+              Padding(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          size: 30,
+                        ),
+                        color: Colors.red,
+                        onPressed: () {}),
+                    Container(height: 10, width: 24)
+                  ],
+                ),
+              ),
+              Text(
+                'Create A Club',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2, 20, 20, 20),
+            child: Center(
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/owner.png',
+                        height: 150,
+                        width: 150,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 30,
+                    width: 30,
+                    child: IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Icon(
+                          Icons.add_a_photo,
+                          size: 20,
+                        ),
+                        color: Colors.white,
+                        onPressed: () {}),
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+              child: Container(
+            width: 300,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)),
+                color: Colors.grey),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                   child: TextField(
                       controller: null,
                       autofocus: false,
                       style: new TextStyle(
-                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -81,17 +131,13 @@ class addClubState extends State<addClub> {
                             borderRadius: new BorderRadius.circular(25.7),
                           ))),
                 ),
-              ),
-              SizedBox(
-                height: 57,
-                width: 650,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                   child: TextField(
                       controller: null,
                       autofocus: false,
                       style: new TextStyle(
-                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -107,17 +153,13 @@ class addClubState extends State<addClub> {
                             borderRadius: new BorderRadius.circular(25.7),
                           ))),
                 ),
-              ),
-              SizedBox(
-                height: 57,
-                width: 650,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                   child: TextField(
                       controller: null,
                       autofocus: false,
                       style: new TextStyle(
-                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -133,23 +175,20 @@ class addClubState extends State<addClub> {
                             borderRadius: new BorderRadius.circular(25.7),
                           ))),
                 ),
-              ),
-              SizedBox(
-                height: 57,
-                width: 650,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                  child: TextFormField(
                       controller: null,
                       autofocus: false,
+                      maxLines: 7,
                       style: new TextStyle(
-                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Club Description',
                           contentPadding: const EdgeInsets.only(
-                              left: 14.0, bottom: 8.0, top: 8.0),
+                              left: 14.0, bottom: 8.0, top: 10.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: new BorderSide(color: Colors.white),
                             borderRadius: new BorderRadius.circular(25.7),
@@ -159,23 +198,20 @@ class addClubState extends State<addClub> {
                             borderRadius: new BorderRadius.circular(25.7),
                           ))),
                 ),
-              ),
-              SizedBox(
-                height: 57,
-                width: 650,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                  child: TextFormField(
                       controller: null,
                       autofocus: false,
+                      maxLines: 7,
                       style: new TextStyle(
-                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Club Mission',
                           contentPadding: const EdgeInsets.only(
-                              left: 14.0, bottom: 8.0, top: 8.0),
+                              left: 14.0, bottom: 8.0, top: 10.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: new BorderSide(color: Colors.white),
                             borderRadius: new BorderRadius.circular(25.7),
@@ -185,23 +221,20 @@ class addClubState extends State<addClub> {
                             borderRadius: new BorderRadius.circular(25.7),
                           ))),
                 ),
-              ),
-              SizedBox(
-                height: 57,
-                width: 650,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                  child: TextFormField(
                       controller: null,
                       autofocus: false,
+                      maxLines: 7,
                       style: new TextStyle(
-                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Club Vision',
                           contentPadding: const EdgeInsets.only(
-                              left: 14.0, bottom: 8.0, top: 8.0),
+                              left: 14.0, bottom: 8.0, top: 10.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: new BorderSide(color: Colors.white),
                             borderRadius: new BorderRadius.circular(25.7),
@@ -211,17 +244,14 @@ class addClubState extends State<addClub> {
                             borderRadius: new BorderRadius.circular(25.7),
                           ))),
                 ),
-              ),
-              SizedBox(
-                height: 57,
-                width: 650,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                   child: TextField(
                       controller: null,
                       autofocus: false,
+                      maxLines: 3,
                       style: new TextStyle(
-                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -237,28 +267,29 @@ class addClubState extends State<addClub> {
                             borderRadius: new BorderRadius.circular(25.7),
                           ))),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-                width: 450,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.red),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(
-                                        color: Colors.teal, width: 2.0)))),
-                    child: Text('Create'),
-                    onPressed: () {},
+                SizedBox(
+                  width: 200,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ))),
+                      child: Text('Create'),
+                      onPressed: () {},
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        )));
+              ],
+            ),
+          ))
+        ],
+      ),
+    );
   }
 }
