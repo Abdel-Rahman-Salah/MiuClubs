@@ -9,7 +9,7 @@ class Feed extends StatelessWidget {
       appBar: Appbarwidget('Feed'),
       bottomSheet: Footerwidget(),
       body: Column(
-        children: [Post('Egycon')],
+        //children: [Post('Egycon')],
       ),
     );
   }
