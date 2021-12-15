@@ -21,7 +21,7 @@ class Footerwidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 10, left: 10),
       child: Text(
-        'CopyRights@Team23',
+        'CopyRights@Team9',
         style: TextStyle(color: Colors.white),
       ),
       color: Color.fromRGBO(51, 51, 51, 1.0),
