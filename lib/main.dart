@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loginsignup/feed.dart';
 import 'package:loginsignup/signup/signup.dart';
-import 'package:loginsignup/imorts.dart';
+import 'package:loginsignup/imports.dart';
 
 void main() {
   runApp(const MyApp());

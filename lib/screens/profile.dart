@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loginsignup/constant.dart';
-import 'package:loginsignup/imorts.dart';
+import 'package:loginsignup/imports.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -18,8 +18,9 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+        bottomSheet:Footerwidget(),
         drawer: Drawerwidget(),
-        appBar: Appbarwidget('profile'),
+        appBar: Appbarwidget('Profile'),
         body: Center(
              
               child: SingleChildScrollView(
