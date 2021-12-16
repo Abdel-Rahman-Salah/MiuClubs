@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loginsignup/navigator.dart';
 
 /*class Layout extends StatelessWidget {
   @override
@@ -49,6 +50,7 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
+              onTap: () => MyNavigator.gofeed(context),
               title: Text(
                 'Feed',
                 style: TextStyle(
@@ -69,6 +71,7 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
+              onTap: () => MyNavigator.goprofile(context),
               title: Text(
                 'Profile',
                 style: TextStyle(
@@ -100,7 +103,14 @@ class Appbarwidget extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: [Icon(Icons.logout)],
+      actions: [
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: Color.fromRGBO(51, 51, 51, 1.0),
+                onPrimary: Color.fromRGBO(254, 3, 3, 1.0)),
+            onPressed: () => MyNavigator.gologin(context),
+            child: Icon(Icons.logout))
+      ],
       bottom: PreferredSize(
           child: Text(page!,
               style: TextStyle(

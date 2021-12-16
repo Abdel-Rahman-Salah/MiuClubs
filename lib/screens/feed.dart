@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loginsignup/imports.dart';
+import 'package:loginsignup/screens/imports.dart';
 
 class Feed extends StatelessWidget {
   @override

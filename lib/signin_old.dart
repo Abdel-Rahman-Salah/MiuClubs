@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loginsignup/screens/feed.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -16,19 +17,19 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      // bottomSheet: Container(
-      //  width: 400,
-      //     height: 50,
-      //     decoration: new BoxDecoration(
-      //         color: Colors.black,
-      //         ),
-      //  child: Padding(
-      //    padding: const EdgeInsets.all(17.0),
-      //    child: Text("CopyRights@",
+        // bottomSheet: Container(
+        //  width: 400,
+        //     height: 50,
+        //     decoration: new BoxDecoration(
+        //         color: Colors.black,
+        //         ),
+        //  child: Padding(
+        //    padding: const EdgeInsets.all(17.0),
+        //    child: Text("CopyRights@",
 
-      //    style: TextStyle(color: Colors.white),),
-      //  )
-      // ),
+        //    style: TextStyle(color: Colors.white),),
+        //  )
+        // ),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(50.0),
           child: AppBar(
@@ -42,7 +43,7 @@ class Login extends StatelessWidget {
         ),
         body: Center(
             child: Container(
-          padding: const EdgeInsets.fromLTRB(15.0,50.0,20.0,15.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 50.0, 20.0, 15.0),
           width: 285,
           height: 350,
           decoration: new BoxDecoration(
@@ -58,8 +59,8 @@ class Login extends StatelessWidget {
                   child: TextField(
                       controller: null,
                       autofocus: false,
-                      style:
-                          new TextStyle(fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                      style: new TextStyle(
+                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -84,8 +85,8 @@ class Login extends StatelessWidget {
                   child: TextField(
                       controller: null,
                       autofocus: false,
-                      style:
-                          new TextStyle(fontSize: 22.0, color: Color(0xFFbdc6cf)),
+                      style: new TextStyle(
+                          fontSize: 22.0, color: Color(0xFFbdc6cf)),
                       decoration: new InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -106,17 +107,24 @@ class Login extends StatelessWidget {
                 height: 75,
                 width: 650,
                 child: Padding(
-                  padding: const EdgeInsets.only(top:40.0),
+                  padding: const EdgeInsets.only(top: 40.0),
                   child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.teal, width: 2.0)))),
-          child: Text('Login'),
-          onPressed: () {},
-        ),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(
+                                        color: Colors.teal, width: 2.0)))),
+                    child: Text(
+                      'Login',
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Feed()));
+                    },
+                  ),
                 ),
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/constant.dart';
 import 'package:loginsignup/signup/signup.dart';
+import 'package:loginsignup/screens/feed.dart';
 
 class Signin extends StatelessWidget {
   const Signin({Key? key}) : super(key: key);
@@ -76,13 +77,13 @@ class Signin extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10))),
                       child: Center(
-                        child: Text(
-                          "Sign in",
+                        child: Text.rich(TextSpan(
+                          text: "Sign in",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500,
                               color: whiteshade),
-                        ),
+                        )),
                       ),
                     ),
                   ),
