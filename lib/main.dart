@@ -13,6 +13,7 @@ var routes = <String, WidgetBuilder>{
   "/create": (BuildContext context) => addClub(),
   "/manage": (BuildContext context) => ManageClubs(),
   "/feed": (BuildContext context) => Feed(),
+  "/profile": (BuildContext context) => Feed(),
 };
 
 void main() => runApp(MaterialApp(
