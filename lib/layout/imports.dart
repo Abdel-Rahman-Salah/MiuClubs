@@ -50,7 +50,7 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
-              onTap: () => MyNavigator.goFeed(context),
+              onTap: () => MyNavigator.gofeed(context),
               title: Text(
                 'Feed',
                 style: TextStyle(

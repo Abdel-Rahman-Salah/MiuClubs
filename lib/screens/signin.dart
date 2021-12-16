@@ -147,7 +147,7 @@ class _SigninState extends State<Signin> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        MyNavigator.goFeed(context);
+                        MyNavigator.gofeed(context);
                       }
                       print(myController.text);
                       print(myController2.text);
