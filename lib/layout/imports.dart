@@ -36,7 +36,7 @@ class Drawerwidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromRGBO(51, 51, 51, 1.0),
+      //backgroundColor: Color.fromRGBO(51, 51, 51, 1.0),
       child: ListView(
         children: [
           Padding(
