@@ -19,6 +19,11 @@ class addClubState extends State<addClub> {
 
   final myController = TextEditingController();
   final myController2 = TextEditingController();
+  final myController3 = TextEditingController();
+  final myController4 = TextEditingController();
+  final myController5 = TextEditingController();
+  final myController6 = TextEditingController();
+  final myController7 = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
@@ -130,192 +135,253 @@ class addClubState extends State<addClub> {
           ),
           Padding(
               padding: const EdgeInsets.all(0),
-              child: Container(
-                width: 300,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
-                    color: Colors.grey),
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                      child: TextField(
-                          controller: null,
-                          autofocus: false,
-                          style: new TextStyle(
-                              fontSize: 12.0, color: Color(0xFFbdc6cf)),
-                          decoration: new InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Club Name',
-                              contentPadding: const EdgeInsets.only(
-                                  left: 14.0, bottom: 8.0, top: 8.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ))),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                      child: TextField(
-                          controller: null,
-                          autofocus: false,
-                          style: new TextStyle(
-                              fontSize: 12.0, color: Color(0xFFbdc6cf)),
-                          decoration: new InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Club Owner',
-                              contentPadding: const EdgeInsets.only(
-                                  left: 14.0, bottom: 8.0, top: 8.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ))),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                      child: TextField(
-                          controller: null,
-                          autofocus: false,
-                          style: new TextStyle(
-                              fontSize: 12.0, color: Color(0xFFbdc6cf)),
-                          decoration: new InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Club President',
-                              contentPadding: const EdgeInsets.only(
-                                  left: 14.0, bottom: 8.0, top: 8.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ))),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                      child: TextFormField(
-                          controller: null,
-                          autofocus: false,
-                          maxLines: 7,
-                          style: new TextStyle(
-                              fontSize: 12.0, color: Color(0xFFbdc6cf)),
-                          decoration: new InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Club Description',
-                              contentPadding: const EdgeInsets.only(
-                                  left: 14.0, bottom: 8.0, top: 10.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ))),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                      child: TextFormField(
-                          controller: null,
-                          autofocus: false,
-                          maxLines: 7,
-                          style: new TextStyle(
-                              fontSize: 12.0, color: Color(0xFFbdc6cf)),
-                          decoration: new InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Club Mission',
-                              contentPadding: const EdgeInsets.only(
-                                  left: 14.0, bottom: 8.0, top: 10.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ))),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                      child: TextFormField(
-                          controller: null,
-                          autofocus: false,
-                          maxLines: 7,
-                          style: new TextStyle(
-                              fontSize: 12.0, color: Color(0xFFbdc6cf)),
-                          decoration: new InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Club Vision',
-                              contentPadding: const EdgeInsets.only(
-                                  left: 14.0, bottom: 8.0, top: 10.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ))),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
-                      child: TextField(
-                          controller: null,
-                          autofocus: false,
-                          maxLines: 3,
-                          style: new TextStyle(
-                              fontSize: 12.0, color: Color(0xFFbdc6cf)),
-                          decoration: new InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Club Committees',
-                              contentPadding: const EdgeInsets.only(
-                                  left: 14.0, bottom: 8.0, top: 8.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.white),
-                                borderRadius: new BorderRadius.circular(25.7),
-                              ))),
-                    ),
-                    SizedBox(
-                      width: 200,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.red),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                              ))),
-                          child: Text('Create'),
-                          onPressed: () {},
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  width: 300,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30)),
+                      color: Colors.grey),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                        child: TextFormField(
+                            controller: myController,
+                            autofocus: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty)
+                                return 'Please enter the club name';
+                              return null;
+                            },
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                            decoration: new InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Club Name',
+                                contentPadding: const EdgeInsets.only(
+                                    left: 14.0, bottom: 8.0, top: 8.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                        child: TextFormField(
+                            controller: myController2,
+                            autofocus: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty)
+                                return 'Please enter the club Owner name';
+                              return null;
+                            },
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                            decoration: new InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Club Owner',
+                                contentPadding: const EdgeInsets.only(
+                                    left: 14.0, bottom: 8.0, top: 8.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                        child: TextFormField(
+                            controller: myController3,
+                            autofocus: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty)
+                                return 'Please enter the club president name';
+                              return null;
+                            },
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                            decoration: new InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Club President',
+                                contentPadding: const EdgeInsets.only(
+                                    left: 14.0, bottom: 8.0, top: 8.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                        child: TextFormField(
+                            controller: myController4,
+                            autofocus: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty)
+                                return 'Please enter the club description';
+                              return null;
+                            },
+                            maxLines: 7,
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                            decoration: new InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Club Description',
+                                contentPadding: const EdgeInsets.only(
+                                    left: 14.0, bottom: 8.0, top: 10.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                        child: TextFormField(
+                            controller: myController5,
+                            autofocus: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty)
+                                return 'Please enter the club mission';
+                              return null;
+                            },
+                            maxLines: 7,
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                            decoration: new InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Club Mission',
+                                contentPadding: const EdgeInsets.only(
+                                    left: 14.0, bottom: 8.0, top: 10.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                        child: TextFormField(
+                            controller: myController6,
+                            autofocus: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty)
+                                return 'Please enter the club vision';
+                              return null;
+                            },
+                            maxLines: 7,
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                            decoration: new InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Club Vision',
+                                contentPadding: const EdgeInsets.only(
+                                    left: 14.0, bottom: 8.0, top: 10.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
+                        child: TextFormField(
+                            controller: myController7,
+                            autofocus: false,
+                            validator: (value) {
+                              if (value == null || value.isEmpty)
+                                return 'Please enter the club committees';
+                              return null;
+                            },
+                            maxLines: 3,
+                            style: new TextStyle(
+                                fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                            decoration: new InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Club Committees',
+                                contentPadding: const EdgeInsets.only(
+                                    left: 14.0, bottom: 8.0, top: 8.0),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      new BorderSide(color: Colors.white),
+                                  borderRadius: new BorderRadius.circular(25.7),
+                                ))),
+                      ),
+                      SizedBox(
+                        width: 200,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.red),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ))),
+                            child: Text('Create'),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Processing Data')),
+                                );
+                              }
+                              print(myController.text);
+                              print(myController2.text);
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ))
         ],

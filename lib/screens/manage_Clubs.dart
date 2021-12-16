@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loginsignup/layout/navigator.dart';
 import '../models/club.dart';
 
 // void main() {
@@ -73,7 +74,9 @@ class _MyAppState extends State<ManageClubs> {
                         spacing: 20,
                         children: [
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                MyNavigator.goToAddClub(context);
+                              },
                               icon: Icon(
                                 Icons.settings,
                                 color: Colors.grey[700],
@@ -107,7 +110,9 @@ class _MyAppState extends State<ManageClubs> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              MyNavigator.goToAddClub(context);
+            },
             icon: Icon(Icons.add_circle_rounded),
             color: Colors.red[700],
             iconSize: 50,
