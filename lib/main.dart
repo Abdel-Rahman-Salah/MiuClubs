@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loginsignup/screens/feed.dart';
 import 'package:loginsignup/screens/manage_Clubs.dart';
 import 'package:loginsignup/screens/signin.dart';
 import 'package:loginsignup/screens/splash_screen.dart';
@@ -11,6 +12,7 @@ var routes = <String, WidgetBuilder>{
   "/admin": (BuildContext context) => AdminHomePage(),
   "/create": (BuildContext context) => addClub(),
   "/manage": (BuildContext context) => ManageClubs(),
+  "/feed": (BuildContext context) => Feed()
 };
 
 void main() => runApp(MaterialApp(
