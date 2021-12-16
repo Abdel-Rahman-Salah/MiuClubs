@@ -67,8 +67,7 @@ class _SigninState extends State<Signin> {
                           return 'Please enter username';
                         return null;
                       },
-                      style: new TextStyle(
-                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                      style: new TextStyle(fontSize: 12.0),
                       decoration: new InputDecoration(
                           fillColor: Colors.black26,
                           filled: true,
@@ -105,8 +104,7 @@ class _SigninState extends State<Signin> {
                           return 'Please enter password';
                         return null;
                       },
-                      style: new TextStyle(
-                          fontSize: 12.0, color: Color(0xFFbdc6cf)),
+                      style: new TextStyle(fontSize: 12.0),
                       decoration: new InputDecoration(
                           fillColor: Colors.black26,
                           filled: true,
@@ -248,120 +246,6 @@ class _CheckerBoxState extends State<CheckerBox> {
           ),
         ],
       ),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class InputField extends StatelessWidget {
-  String headerText;
-  String hintTexti;
-  InputField({Key? key, required this.headerText, required this.hintTexti})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            bottom: 10,
-          ),
-          child: Text(
-            headerText,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
-          ),
-        ),
-        Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
-            decoration: BoxDecoration(
-              color: grayshade.withOpacity(0.5),
-              // border: Border.all(
-              //   width: 1,
-              // ),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: hintTexti,
-                  border: InputBorder.none,
-                ),
-              ),
-            )
-            //IntrinsicHeight
-
-            ),
-      ],
-    );
-  }
-}
-
-class InputFieldPassword extends StatefulWidget {
-  String headerText;
-  String hintTexti;
-
-  InputFieldPassword(
-      {Key? key, required this.headerText, required this.hintTexti})
-      : super(key: key);
-
-  @override
-  State<InputFieldPassword> createState() => _InputFieldPasswordState();
-}
-
-class _InputFieldPasswordState extends State<InputFieldPassword> {
-  bool _visible = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            bottom: 10,
-          ),
-          child: Text(
-            widget.headerText,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 20, right: 20),
-          decoration: BoxDecoration(
-            color: grayshade.withOpacity(0.5),
-            // border: Border.all(
-            //   width: 1,
-            // ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: TextField(
-              obscureText: _visible,
-              decoration: InputDecoration(
-                  hintText: widget.hintTexti,
-                  border: InputBorder.none,
-                  suffixIcon: IconButton(
-                      icon: Icon(
-                          _visible ? Icons.visibility : Icons.visibility_off),
-                      onPressed: () {
-                        setState(() {
-                          _visible = !_visible;
-                        });
-                      })),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

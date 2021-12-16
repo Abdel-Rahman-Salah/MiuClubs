@@ -1,61 +1,186 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/constant.dart';
+import 'package:loginsignup/layout/navigator.dart';
 import 'package:loginsignup/screens/signin.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  bool _isHidden = true;
+  final _formKey = GlobalKey<FormState>();
+
+  final myController = TextEditingController();
+  final myController2 = TextEditingController();
+  final myController3 = TextEditingController();
+  final myController4 = TextEditingController();
+  @override
+  void dispose() {
+    myController.dispose();
+    myController2.dispose();
+    myController3.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Stack(
+      body: ListView(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height * 0.9,
             width: MediaQuery.of(context).size.width,
-            color: grayshade,
-          ),
-          const TopSginup(),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.10,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.9,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: whiteshade,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(45),
-                      topRight: Radius.circular(45))),
+            decoration: BoxDecoration(
+                color: whiteshade,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(45),
+                    topRight: Radius.circular(45))),
+            child: Form(
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.09),
-                    child: Image.asset("assets/images/login.jpg"),
+                  Expanded(
+                    child: Container(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.09),
+                      child: Image.asset("assets/images/login.jpg"),
+                    ),
                   ),
-                  InputField(headerText: "Username", hintTexti: "Username"),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Text(
+                      "Username",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 4),
+                    child: TextFormField(
+                      controller: myController,
+                      autofocus: false,
+                      validator: (value) {
+                        if (value == null || value.isEmpty)
+                          return 'Please enter username';
+                        return null;
+                      },
+                      style: new TextStyle(fontSize: 12.0),
+                      decoration: new InputDecoration(
+                          fillColor: Colors.black26,
+                          filled: true,
+                          hintText: 'Enter Username',
+                          contentPadding: const EdgeInsets.only(
+                              left: 14.0, bottom: 8.0, top: 10.0),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.white),
+                            borderRadius: new BorderRadius.circular(10),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.white),
+                            borderRadius: new BorderRadius.circular(10),
+                          )),
+                    ),
+                  ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
-                  InputField(
-                      headerText: "Email",
-                      hintTexti: "Name+ID@miuegypt.edu.eg"),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Text(
+                      "Email",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 4),
+                    child: TextFormField(
+                      controller: myController2,
+                      autofocus: false,
+                      validator: (value) {
+                        if (value == null || value.isEmpty)
+                          return 'Please enter Email';
+                        return null;
+                      },
+                      style: new TextStyle(fontSize: 12.0),
+                      decoration: new InputDecoration(
+                          fillColor: Colors.black26,
+                          filled: true,
+                          hintText: 'Enter Email',
+                          contentPadding: const EdgeInsets.only(
+                              left: 14.0, bottom: 8.0, top: 10.0),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.white),
+                            borderRadius: new BorderRadius.circular(10),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.white),
+                            borderRadius: new BorderRadius.circular(10),
+                          )),
+                    ),
+                  ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
-                  InputFieldPassword(
-                    headerText: "Password",
-                    hintTexti: "At least 8 Characters",
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Text(
+                      "Password",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 4),
+                    child: TextFormField(
+                      obscureText: _isHidden,
+                      controller: myController3,
+                      validator: (value) {
+                        if (value == null || value.isEmpty)
+                          return 'Please enter Password';
+                        return null;
+                      },
+                      style: new TextStyle(fontSize: 12.0),
+                      decoration: new InputDecoration(
+                        fillColor: Colors.black26,
+                        filled: true,
+                        hintText: 'Enter Password',
+                        contentPadding: const EdgeInsets.only(
+                            left: 14.0, bottom: 8.0, top: 10.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.white),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.white),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        suffix: InkWell(
+                          onTap: _togglePasswordView,
+                          child: Icon(Icons.visibility),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   const CheckerBox(),
                   InkWell(
                     onTap: () {
-                      print("Sign up click");
+                      if (_formKey.currentState!.validate()) {
+                        MyNavigator.GoLogin(context);
+                      }
+                      print(myController.text);
+                      print(myController2.text);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -79,7 +204,7 @@ class SignUp extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.18,
-                        top: MediaQuery.of(context).size.height * 0.08),
+                        top: MediaQuery.of(context).size.height * 0.03),
                     child: Text.rich(
                       TextSpan(
                           text: "Already Have An Account? ",
@@ -105,8 +230,14 @@ class SignUp extends StatelessWidget {
             ),
           ),
         ],
-      )),
+      ),
     );
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
   }
 }
 
@@ -276,37 +407,6 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class TopSginup extends StatelessWidget {
-  const TopSginup({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 15, left: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.arrow_back_sharp,
-            color: whiteshade,
-            size: 40,
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-          Text(
-            "Sign up",
-            style: TextStyle(color: whiteshade, fontSize: 25),
-          )
-        ],
-      ),
     );
   }
 }
