@@ -13,7 +13,7 @@ class MyNavigator {
   }
 
   static void gofeed(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Feed()));
+    Navigator.pushNamed(context, "/feed");
   }
 
   static void goprofile(BuildContext context) {
