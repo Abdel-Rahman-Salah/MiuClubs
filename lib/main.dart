@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:loginsignup/screens/feed.dart';
-import 'package:loginsignup/screens/manage_Clubs.dart';
+import 'package:loginsignup/screens/manage_clubs.dart';
 import 'package:loginsignup/screens/signin.dart';
 import 'package:loginsignup/screens/splash_screen.dart';
 
-import 'screens/add_Club.dart';
+import 'screens/add_club.dart';
 import 'screens/admin_homepage.dart';
 
 var routes = <String, WidgetBuilder>{

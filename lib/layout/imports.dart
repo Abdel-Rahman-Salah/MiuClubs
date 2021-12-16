@@ -36,7 +36,7 @@ class Drawerwidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromRGBO(51, 51, 51, 1.0),
+      //backgroundColor: Color.fromRGBO(51, 51, 51, 1.0),
       child: ListView(
         children: [
           Padding(
@@ -50,7 +50,7 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
-              onTap: () => MyNavigator.gofeed(context),
+              onTap: () => MyNavigator.goFeed(context),
               title: Text(
                 'Feed',
                 style: TextStyle(
