@@ -2,18 +2,18 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/constant.dart';
 import 'package:loginsignup/layout/navigator.dart';
-import 'package:loginsignup/screens/signin_admin.dart';
+import 'package:loginsignup/screens/signin.dart';
 import 'package:loginsignup/screens/signup.dart';
 import 'package:loginsignup/screens/feed.dart';
 
-class Signin extends StatefulWidget {
-  const Signin({Key? key}) : super(key: key);
+class SigninAdmin extends StatefulWidget {
+  const SigninAdmin({Key? key}) : super(key: key);
 
   @override
-  State<Signin> createState() => _SigninState();
+  State<SigninAdmin> createState() => _SigninAdminState();
 }
 
-class _SigninState extends State<Signin> {
+class _SigninAdminState extends State<SigninAdmin> {
   final _formKey = GlobalKey<FormState>();
 
   final myController = TextEditingController();
@@ -146,7 +146,7 @@ class _SigninState extends State<Signin> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        MyNavigator.gofeed(context);
+                        MyNavigator.goToAdminHomepage(context);
                       }
                       print(myController.text);
                       print(myController2.text);
@@ -176,38 +176,14 @@ class _SigninState extends State<Signin> {
                         top: MediaQuery.of(context).size.height * 0.03),
                     child: Text.rich(
                       TextSpan(
-                          text: "Don't Have An Account? ",
-                          style: TextStyle(
-                              color: grayshade.withOpacity(0.8), fontSize: 16),
-                          children: [
-                            TextSpan(
-                                text: "Sign Up",
-                                style: TextStyle(color: red, fontSize: 16),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => SignUp()));
-                                    print("Sign Up click");
-                                  }),
-                          ]),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.149,
-                        top: MediaQuery.of(context).size.height * 0.03),
-                    child: Text.rich(
-                      TextSpan(
-                          text: "Sign in As Admin",
+                          text: "Sign in As User",
                           style: TextStyle(color: red, fontSize: 16),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SigninAdmin()));
+                                      builder: (context) => Signin()));
                               print("Sign Up click");
                             }),
                     ),
