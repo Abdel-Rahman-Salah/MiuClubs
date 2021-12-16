@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:loginsignup/constant.dart';
-import 'package:loginsignup/screens/imports.dart';
+import 'package:loginsignup/layout/constant.dart';
+import 'package:loginsignup/layout/imports.dart';
 
 // void main(List<String> args) {
 //   runApp(Profile());
