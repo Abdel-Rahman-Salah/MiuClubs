@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => MyNavigator.goToAdminHomepage(context));
+    Timer(Duration(seconds: 5), () => MyNavigator.GoLogin(context));
   }
 
   @override
