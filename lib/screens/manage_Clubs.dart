@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/club.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -13,10 +14,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Club> clubs = [
-    Club(logo: "tedx.png", name: "Tedx"),
-    Club(logo: "mun.png", name: "MUN"),
-    Club(logo: "gamerslegacy.png", name: "GL"),
-    Club(logo: "move.png", name: "Move")
+    Club.named("Tedx", "tedx.png"),
+    Club.named("MUN", "mun.png"),
+    Club.named("GL", "gamerslegacy.png"),
+    Club.named("Move", "move.png")
   ];
   @override
   Widget build(BuildContext context) {
@@ -34,28 +35,28 @@ class _MyAppState extends State<MyApp> {
       ),
       body: Column(
         children: [
-          Text("Manage Clubs djdj",
-          style: TextStyle(
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Manage Clubs",
+              style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.red),
+            ),
           ),
           Expanded(
             child: ListView.builder(
               itemCount: clubs.length,
               itemBuilder: (context, int index) {
                 {
-                  String path = clubs.elementAt(index).logo;
+                  String path = clubs.elementAt(index).logopath;
                   print(path);
                   return Container(
-                    color:Colors.grey[200],
+                    color: Colors.grey[200],
                     // width:MediaQuery.of(context).size.width,
                     // height:MediaQuery.of(context).size.height,
                     child: ListTile(
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.horizontal(right: Radius.circular(200)),
-                      ),
                       leading: ConstrainedBox(
                         constraints: BoxConstraints(
                           minWidth: 44,
@@ -63,21 +64,30 @@ class _MyAppState extends State<MyApp> {
                           maxWidth: 64,
                           maxHeight: 64,
                         ),
-                        child: Image.asset('assets/images/$path', fit: BoxFit.cover,
-                        
+                        child: Image.asset(
+                          'assets/images/$path',
+                          fit: BoxFit.cover,
                         ),
                       ),
                       trailing: Wrap(
-                        spacing: 45,
+                        spacing: 20,
                         children: [
-                          IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.settings,
+                                color: Colors.grey[700],
+                              )),
                           OutlinedButton(
                               onPressed: () {
                                 setState(() {
                                   clubs.removeAt(index);
                                 });
                               },
-                              child: Icon(Icons.delete)),
+                              child: Icon(
+                                Icons.delete_rounded,
+                                color: Colors.grey[700],
+                              )),
                         ],
                       ),
                       title: Text(
@@ -96,13 +106,14 @@ class _MyAppState extends State<MyApp> {
               },
             ),
           ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.add_circle_rounded),
+            color: Colors.red[700],
+            iconSize: 50,
+          ),
         ],
       ),
     );
   }
-}
-
-class Club {
-  String logo, name;
-  Club({required this.logo, required this.name});
 }
