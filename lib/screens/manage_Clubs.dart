@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import '../models/club.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
-}
+// void main() {
+//   runApp(MaterialApp(
+//     home: ManageClubs(),
+//   ));
+// }
 
-class MyApp extends StatefulWidget {
+class ManageClubs extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<ManageClubs> {
   List<Club> clubs = [
     Club.named("Tedx", "tedx.png"),
     Club.named("MUN", "mun.png"),
