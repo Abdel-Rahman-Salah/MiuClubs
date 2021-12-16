@@ -52,7 +52,7 @@ class Drawerwidget extends StatelessWidget {
             child: ListTile(
               onTap: () {
                 MyNavigator.goPop(context);
-                MyNavigator.goFeed(context);
+                MyNavigator.gofeed(context);
               },
               title: Text(
                 'Feed',
