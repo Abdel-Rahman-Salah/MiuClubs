@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:loginsignup/constant.dart';
 import 'package:loginsignup/screens/imports.dart';
 
-void main(List<String> args) {
-  runApp(MyApp());
-}
+// void main(List<String> args) {
+//   runApp(Profile());
+// }
 
-class MyApp extends StatelessWidget {
+class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        home: Profile(),
+        home: ClubProfile(),
       );
 }
 
-class Profile extends StatelessWidget {
+class ClubProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
