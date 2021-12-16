@@ -293,11 +293,6 @@ class TopSginup extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.arrow_back_sharp,
-            color: whiteshade,
-            size: 40,
-          ),
           const SizedBox(
             width: 15,
           ),
