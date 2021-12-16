@@ -20,15 +20,11 @@ class MyNavigator {
     Navigator.pushNamed(context, "/manage");
   }
 
-  static void gologin(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-  }
-
   static void gofeed(BuildContext context) {
-    Navigator.pushNamed(context, "/feed");
+    Navigator.pushReplacementNamed(context, "/feed");
   }
 
   static void goprofile(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+    Navigator.pushReplacementNamed(context, "/profile");
   }
 }

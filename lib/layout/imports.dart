@@ -108,7 +108,7 @@ class Appbarwidget extends StatelessWidget with PreferredSizeWidget {
             style: ElevatedButton.styleFrom(
                 primary: Color.fromRGBO(51, 51, 51, 1.0),
                 onPrimary: Color.fromRGBO(254, 3, 3, 1.0)),
-            onPressed: () => MyNavigator.gologin(context),
+            onPressed: () => MyNavigator.GoLogin(context),
             child: Icon(Icons.logout))
       ],
       bottom: PreferredSize(
