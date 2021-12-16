@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loginsignup/navigator.dart';
+import 'package:loginsignup/layout/navigator.dart';
 
 /*class Layout extends StatelessWidget {
   @override

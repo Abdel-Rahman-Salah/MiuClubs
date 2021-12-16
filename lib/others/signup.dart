@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:loginsignup/constant.dart';
-import 'package:loginsignup/signin/signin.dart';
+import 'package:loginsignup/layout/constant.dart';
+import 'package:loginsignup/screens/signin.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class SignUp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 100,
+                    height: 250,
                     width: MediaQuery.of(context).size.width * 0.8,
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.09),
@@ -55,7 +55,7 @@ class SignUp extends StatelessWidget {
                   const CheckerBox(),
                   InkWell(
                     onTap: () {
-                      print("Sign up click");
+                      print("Sign up click ");
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,

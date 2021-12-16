@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../imports.dart';
-import '../navigator.dart';
+import '../layout/imports.dart';
+import '../layout/navigator.dart';
 
 class AdminHomePage extends StatefulWidget {
   @override

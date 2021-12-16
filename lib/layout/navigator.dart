@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loginsignup/signin_old.dart';
+import 'package:loginsignup/others/signin_old.dart';
 import 'package:loginsignup/screens/feed.dart';
 import 'package:loginsignup/screens/profile.dart';
 
@@ -18,10 +18,9 @@ class MyNavigator {
 
   static void goToManageClubs(BuildContext context) {
     Navigator.pushNamed(context, "/manage");
-  
   }
-  
-    static void gologin(BuildContext context) {
+
+  static void gologin(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
   }
 
@@ -31,4 +30,5 @@ class MyNavigator {
 
   static void goprofile(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+  }
 }

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:loginsignup/navigator.dart';
+import 'package:loginsignup/layout/navigator.dart';
 
 class addClub extends StatefulWidget {
   const addClub({Key? key}) : super(key: key);

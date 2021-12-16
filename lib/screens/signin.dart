@@ -1,10 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:loginsignup/constant.dart';
-import 'package:loginsignup/signin/signin.dart';
+import 'package:loginsignup/layout/constant.dart';
+import 'package:loginsignup/screens/signup.dart';
+import 'package:loginsignup/screens/feed.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+class Signin extends StatelessWidget {
+  const Signin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,9 @@ class SignUp extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: grayshade,
+            color: blackshade,
           ),
-          const TopSginup(),
+          const TopSginin(),
           Positioned(
             top: MediaQuery.of(context).size.height * 0.10,
             child: Container(
@@ -32,7 +33,7 @@ class SignUp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 250,
+                    height: 130,
                     width: MediaQuery.of(context).size.width * 0.8,
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.09),
@@ -42,20 +43,30 @@ class SignUp extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  InputField(
-                      headerText: "Email",
-                      hintTexti: "Name+ID@miuegypt.edu.eg"),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   InputFieldPassword(
-                    headerText: "Password",
-                    hintTexti: "At least 8 Characters",
+                      headerText: "Password",
+                      hintTexti: "At least 8 Characters"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const CheckerBox(),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                                color: red.withOpacity(0.75),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  const CheckerBox(),
                   InkWell(
                     onTap: () {
-                      print("Sign up click ");
+                      print("Sign up click");
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -66,36 +77,36 @@ class SignUp extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10))),
                       child: Center(
-                        child: Text(
-                          "Sign up",
+                        child: Text.rich(TextSpan(
+                          text: "Sign in",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500,
                               color: whiteshade),
-                        ),
+                        )),
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.18,
+                        left: MediaQuery.of(context).size.width * 0.149,
                         top: MediaQuery.of(context).size.height * 0.08),
                     child: Text.rich(
                       TextSpan(
-                          text: "Already Have An Account? ",
+                          text: "Don't Have An Account? ",
                           style: TextStyle(
                               color: grayshade.withOpacity(0.8), fontSize: 16),
                           children: [
                             TextSpan(
-                                text: "Sign In",
+                                text: "Sign Up",
                                 style: TextStyle(color: red, fontSize: 16),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Signin()));
-                                    print("Sign in click");
+                                            builder: (context) => SignUp()));
+                                    print("Sign Up click");
                                   }),
                           ]),
                     ),
@@ -138,7 +149,7 @@ class _CheckerBoxState extends State<CheckerBox> {
           Checkbox(
               value: isCheck,
               checkColor: whiteshade, // color of tick Mark
-              activeColor: red,
+              activeColor: blue,
               onChanged: (val) {
                 setState(() {
                   isCheck = val!;
@@ -147,18 +158,9 @@ class _CheckerBoxState extends State<CheckerBox> {
               }),
           Text.rich(
             TextSpan(
-                text: "I agree with ",
-                style:
-                    TextStyle(color: grayshade.withOpacity(0.8), fontSize: 16),
-                children: [
-                  TextSpan(
-                      text: "Terms ",
-                      style: TextStyle(color: red, fontSize: 16)),
-                  const TextSpan(text: "and "),
-                  TextSpan(
-                      text: "Policy",
-                      style: TextStyle(color: red, fontSize: 16)),
-                ]),
+              text: "Remember me",
+              style: TextStyle(color: grayshade.withOpacity(0.8), fontSize: 16),
+            ),
           ),
         ],
       ),
@@ -280,8 +282,8 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
   }
 }
 
-class TopSginup extends StatelessWidget {
-  const TopSginup({
+class TopSginin extends StatelessWidget {
+  const TopSginin({
     Key? key,
   }) : super(key: key);
 
@@ -302,7 +304,7 @@ class TopSginup extends StatelessWidget {
             width: 15,
           ),
           Text(
-            "Sign up",
+            "Sign In",
             style: TextStyle(color: whiteshade, fontSize: 25),
           )
         ],
