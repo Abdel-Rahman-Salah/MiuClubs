@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loginsignup/layout/imports.dart';
 
-import '../layout/imports.dart';
 import '../layout/navigator.dart';
 
 class AdminHomePage extends StatefulWidget {
