@@ -8,7 +8,20 @@ class MyNavigator {
     Navigator.pushNamed(context, "/login");
   }
 
-  static void gologin(BuildContext context) {
+  static void goToAdminHomepage(BuildContext context) {
+    Navigator.pushNamed(context, "/admin");
+  }
+
+  static void goToAddClub(BuildContext context) {
+    Navigator.pushNamed(context, "/create");
+  }
+
+  static void goToManageClubs(BuildContext context) {
+    Navigator.pushNamed(context, "/manage");
+  
+  }
+  
+    static void gologin(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
   }
 
@@ -18,5 +31,4 @@ class MyNavigator {
 
   static void goprofile(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
-  }
 }

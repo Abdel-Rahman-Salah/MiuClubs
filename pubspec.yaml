@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   mdi: ^3.0.0
+  image_picker: ^0.8.4+4
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -59,7 +60,15 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/images/login.jpg
+    - assets/images/president.png
+    - assets/images/owner.png
+    - assets/images/default.png
+    - assets/images/tedx.png
+    - assets/images/mun.png
+    - assets/images/gamerslegacy.png
+    - assets/images/move.png
+
   # To add assets to your application, add an assets section, like this:
   
   #   - images/a_dot_ham.jpeg
