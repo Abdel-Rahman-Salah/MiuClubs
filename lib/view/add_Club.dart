@@ -73,7 +73,7 @@ class addClubState extends State<addClub> {
                     radius: 50,
                     child: ClipOval(
                       child: Image.asset(
-                        'assets/images/owner.png',
+                        'assets/images/default.png',
                         height: 150,
                         width: 150,
                         fit: BoxFit.cover,
