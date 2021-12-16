@@ -8,6 +8,10 @@ class MyNavigator {
     Navigator.pushNamed(context, "/login");
   }
 
+  static void GoLoginAdmin(BuildContext context) {
+    Navigator.pushNamed(context, "/loginadmin");
+  }
+
   static void goToAdminHomepage(BuildContext context) {
     Navigator.pushNamed(context, "/admin");
   }
@@ -26,5 +30,9 @@ class MyNavigator {
 
   static void goprofile(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+  }
+
+  static void goPop(BuildContext context) {
+    Navigator.pop(context);
   }
 }

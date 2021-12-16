@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loginsignup/screens/feed.dart';
 import 'package:loginsignup/screens/manage_clubs.dart';
 import 'package:loginsignup/screens/signin.dart';
+import 'package:loginsignup/screens/signin_admin.dart';
 import 'package:loginsignup/screens/splash_screen.dart';
 
 import 'screens/add_club.dart';
@@ -13,6 +14,7 @@ var routes = <String, WidgetBuilder>{
   "/create": (BuildContext context) => addClub(),
   "/manage": (BuildContext context) => ManageClubs(),
   "/feed": (BuildContext context) => Feed(),
+  "/adminlogin": (BuildContext context) => SigninAdmin(),
 };
 
 void main() => runApp(MaterialApp(

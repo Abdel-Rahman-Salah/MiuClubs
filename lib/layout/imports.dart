@@ -50,7 +50,10 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
-              onTap: () => MyNavigator.goFeed(context),
+              onTap: () {
+                MyNavigator.goPop(context);
+                MyNavigator.goFeed(context);
+              },
               title: Text(
                 'Feed',
                 style: TextStyle(
@@ -71,7 +74,10 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
-              onTap: () => MyNavigator.goprofile(context),
+              onTap: () {
+                MyNavigator.goPop(context);
+                MyNavigator.goprofile(context);
+              },
               title: Text(
                 'Profile',
                 style: TextStyle(
@@ -108,7 +114,7 @@ class Appbarwidget extends StatelessWidget with PreferredSizeWidget {
             style: ElevatedButton.styleFrom(
                 primary: Color.fromRGBO(51, 51, 51, 1.0),
                 onPrimary: Color.fromRGBO(254, 3, 3, 1.0)),
-            onPressed: () => MyNavigator.GoLogin(context),
+            onPressed: () => Navigator.pop(context),
             child: Icon(Icons.logout))
       ],
       bottom: PreferredSize(
