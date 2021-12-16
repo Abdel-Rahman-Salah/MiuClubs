@@ -24,12 +24,12 @@ class MyNavigator {
     Navigator.pushNamed(context, "/manage");
   }
 
-  static void goFeed(BuildContext context) {
-    Navigator.pushNamed(context, "/feed");
+  static void gofeed(BuildContext context) {
+    Navigator.pushReplacementNamed(context, "/feed");
   }
 
   static void goprofile(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+    Navigator.pushReplacementNamed(context, "/profile");
   }
 
   static void goPop(BuildContext context) {

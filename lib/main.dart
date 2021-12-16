@@ -15,6 +15,7 @@ var routes = <String, WidgetBuilder>{
   "/manage": (BuildContext context) => ManageClubs(),
   "/feed": (BuildContext context) => Feed(),
   "/adminlogin": (BuildContext context) => SigninAdmin(),
+  "/profile": (BuildContext context) => Feed(),
 };
 
 void main() => runApp(MaterialApp(
