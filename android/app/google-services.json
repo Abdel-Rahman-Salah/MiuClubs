@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "791521725217",
+    "project_id": "miuclubs",
+    "storage_bucket": "miuclubs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791521725217:android:77a3a7b8537d0f87c80c60",
+        "android_client_info": {
+          "package_name": "com.team9.miu_clubs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791521725217-3p95ufj609tp3b0jec13hc6pokoc4iau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlGdqPHCvfwZ1qlMcPTFEUg8v-7B3ObmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791521725217-3p95ufj609tp3b0jec13hc6pokoc4iau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
