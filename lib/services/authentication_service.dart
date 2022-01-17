@@ -41,3 +41,8 @@ Future<String> SignUp({String email, String password}) async {
 	}
 }
 
+Future<void> signOut() async {
+	await _firebaseAuth.signOut();
+}
+}
+
