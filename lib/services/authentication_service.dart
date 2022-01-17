@@ -6,3 +6,16 @@ final FirebaseAuth _firebaseAuth;
 AuthenticationService(this._firebaseAuth);
 
 Stream<User> get authStateChanges => _firebaseAuth.idTokenChanges();
+
+Future<String> Signin({required String email, required String password}) async {
+	try {
+	await _firebaseAuth.signInWithEmailAndPassword(
+		email: email, password: password);
+
+	return "Signed In";
+	} on FirebaseAuthException catch (e) {
+	  print(e.message);
+		return e.message;
+	}
+	}
+}
