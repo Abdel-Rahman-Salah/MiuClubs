@@ -5,7 +5,7 @@ import 'package:loginsignup/screens/profile.dart';
 
 class MyNavigator {
   static void GoLogin(BuildContext context) {
-    Navigator.pushNamed(context, "/login");
+    Navigator.pushReplacementNamed(context, "/login");
   }
 
   static void GoLoginAdmin(BuildContext context) {
@@ -29,7 +29,13 @@ class MyNavigator {
   }
 
   static void goprofile(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/profile");
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/profile");
+  }
+
+  static void goTimeline(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/timeline");
   }
 
   static void goPop(BuildContext context) {

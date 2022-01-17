@@ -8,30 +8,35 @@ class Timeline extends StatelessWidget {
       drawer: Drawerwidget(),
       appBar: Appbarwidget('Timeline'),
       bottomSheet: Footerwidget(),
-      body: 
-      Column(
+      body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Row(children:[
-            Text('Date',
+          Row(
+            children: [
+              Text(
+                'Date',
+              ),
+              Image.asset('assets/images/tedx.png'),
+            ],
           ),
-          Image.asset('images/lake.jpg'),
-          ],),
-
-         Row(children:[
-            Text('Date',
+          Row(
+            children: [
+              Text(
+                'Date',
+              ),
+              Image.asset('assets/images/tedx.png'),
+            ],
           ),
-          Image.asset('images/lake.jpg'),
-          ],),
-          
-          Row(children:[
-            Text('Date',
+          Row(
+            children: [
+              Text(
+                'Date',
+              ),
+              Image.asset('assets/images/tedx.png'),
+            ],
           ),
-          Image.asset('images/lake.jpg'),
-          ],), 
         ],
       ),
     );
-        
   }
 }

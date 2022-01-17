@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/constant.dart';
 import 'package:loginsignup/layout/imports.dart';
 
-// void main(List<String> args) {
-//   runApp(Profile());
-// }
-
-class Profile extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-        home: ClubProfile(),
-      );
-}
-
 class ClubProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
