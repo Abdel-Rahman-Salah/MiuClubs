@@ -32,7 +32,15 @@ class Footerwidget extends StatelessWidget {
   }
 }
 
+class Nemo {
+  static const String pageF = '/feed';
+  static const String pageP = '/profile';
+  static const String pageG = '/gallery';
+}
+
 class Drawerwidget extends StatelessWidget {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  String? _currentPage;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -51,7 +59,7 @@ class Drawerwidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
               onTap: () {
-                MyNavigator.goPop(context);
+                Navigator.of(context).pop();
                 MyNavigator.gofeed(context);
               },
               title: Text(
@@ -64,6 +72,9 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
+              onTap: () {
+                MyNavigator.goTimeline(context);
+              },
               title: Text(
                 'TimeLine',
                 style: TextStyle(
@@ -75,7 +86,6 @@ class Drawerwidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
               onTap: () {
-                MyNavigator.goPop(context);
                 MyNavigator.goprofile(context);
               },
               title: Text(

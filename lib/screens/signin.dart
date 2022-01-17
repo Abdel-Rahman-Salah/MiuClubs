@@ -173,7 +173,7 @@ class _SigninState extends State<Signin> {
                   Container(
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.149,
-                        top: MediaQuery.of(context).size.height * 0.03),
+                        top: MediaQuery.of(context).size.height * 0.01),
                     child: Text.rich(
                       TextSpan(
                           text: "Don't Have An Account? ",
@@ -196,8 +196,8 @@ class _SigninState extends State<Signin> {
                   ),
                   Container(
                     margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.149,
-                        top: MediaQuery.of(context).size.height * 0.03),
+                      left: MediaQuery.of(context).size.width * 0.149,
+                    ),
                     child: Text.rich(
                       TextSpan(
                           text: "Sign in As Admin",
