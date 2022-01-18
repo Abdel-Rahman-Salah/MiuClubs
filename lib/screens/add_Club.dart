@@ -45,14 +45,14 @@ class addClubState extends State<addClub> {
           return AlertDialog(
             title: Text(
               "Choose option",
-              style: TextStyle(color: Colors.blue),
+              style: TextStyle(color: Colors.red),
             ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
                   Divider(
                     height: 1,
-                    color: Colors.blue,
+                    color: Colors.red,
                   ),
                   ListTile(
                     onTap: () {
@@ -61,12 +61,12 @@ class addClubState extends State<addClub> {
                     title: Text("Gallery"),
                     leading: Icon(
                       Icons.account_box,
-                      color: Colors.blue,
+                      color: Colors.red,
                     ),
                   ),
                   Divider(
                     height: 1,
-                    color: Colors.blue,
+                    color: Colors.red,
                   ),
                   ListTile(
                     onTap: () {
@@ -75,7 +75,7 @@ class addClubState extends State<addClub> {
                     title: Text("Camera"),
                     leading: Icon(
                       Icons.camera,
-                      color: Colors.blue,
+                      color: Colors.red,
                     ),
                   ),
                 ],
@@ -85,24 +85,19 @@ class addClubState extends State<addClub> {
         });
   }
 
-  // Future uploadPic(BuildContext context) async {
-  //   FirebaseStorage storage = FirebaseStorage.instance;
-  //   Reference ref = storage.ref().child("images/" + DateTime.now().toString());
-  //   UploadTask uploadTask = ref.putFile(File(_image!.path));
-
-  //   setState(() {
-  //     Scaffold.of(context)
-  //         .showSnackBar(SnackBar(content: Text('picture added')));
-  //     print("image pressed");
-  //   });
-  // }
-
   Future uploadImageToFirebase(BuildContext context) async {
     String fileName = basename(_image!.path);
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child('uploads/$fileName');
 
     UploadTask uploadTask = ref.putFile(_image!);
+    var url;
+    //uploadTask.whenComplete(() {
+    url = ref.getDownloadURL();
+    //}).catchError((onError) {
+    //print(onError);
+    //});
+    return url;
   }
 
   @override
@@ -415,18 +410,19 @@ class addClubState extends State<addClub> {
                                             BorderRadius.circular(18.0),
                                       ))),
                                   child: Text('Create'),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
+                                      String url =
+                                          await uploadImageToFirebase(context);
                                       clubs.add({
                                         'Club_Name': myController.text,
                                         'Club_Owner': myController2.text,
+                                        'Club_Image': url,
                                         'Club_President': myController3.text,
                                         'Club_Description': myController4.text,
                                         'Club_Mission': myController5.text,
                                         'Club_Vision': myController6.text,
                                       });
-
-                                      uploadImageToFirebase(context);
 
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -434,6 +430,7 @@ class addClubState extends State<addClub> {
                                             content: Text('Club Added')),
                                       );
                                     }
+                                    print(url);
                                     print(myController.text);
                                     print(myController2.text);
                                   },

@@ -200,7 +200,7 @@ class AdminHomePageState extends State<AdminHomePage> {
                             Flexible(
                               flex: 2,
                               child: Text(
-                                'Delete Clubs',
+                                'View Club Requests',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14.0,

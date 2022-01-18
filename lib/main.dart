@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/screens/feed.dart';
+import 'package:loginsignup/screens/location_view.dart';
 import 'package:loginsignup/screens/manage_clubs.dart';
 import 'package:loginsignup/screens/profile.dart';
 import 'package:loginsignup/screens/signin.dart';
@@ -24,6 +25,7 @@ var routes = <String, WidgetBuilder>{
   "/adminlogin": (BuildContext context) => SigninAdmin(),
   "/profile": (BuildContext context) => ClubProfile(),
   "/timeline": (BuildContext context) => Timeline(),
+  "/location_view": (BuildContext context) => locationview(),
 };
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +57,7 @@ class myapp extends StatelessWidget {
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               } else if (snapshot.hasData) {
-                return addClub();
+                return AdminHomePage();
               } else {
                 return SplashScreen();
               }

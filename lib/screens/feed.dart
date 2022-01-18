@@ -26,11 +26,11 @@ class _FeedState extends State<Feed> {
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
-            if (snapshot.connectionState.name != 'active') {
-              return Text(snapshot.connectionState.name);
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Text(snapshot.toString());
             }
             if (!snapshot.hasData) {
-              return Text('${snapshot.connectionState.name},........no data');
+              return Text('${snapshot},........no data');
             }
             var Qdata = (snapshot.data! as QuerySnapshot);
             List<Post> posts = [];
