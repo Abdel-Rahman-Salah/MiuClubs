@@ -104,6 +104,19 @@ class Drawerwidget extends StatelessWidget {
                     fontSize: 24, color: Color.fromRGBO(254, 3, 3, 1.0)),
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ListTile(
+              onTap: () {
+                MyNavigator.goloc(context);
+              },
+              title: Text(
+                'Location',
+                style: TextStyle(
+                    fontSize: 24, color: Color.fromRGBO(254, 3, 3, 1.0)),
+              ),
+            ),
           )
         ],
       ),

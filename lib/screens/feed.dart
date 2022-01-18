@@ -30,7 +30,7 @@ class _FeedState extends State<Feed> {
               return Text(snapshot.connectionState.toString());
             }
             if (!snapshot.hasData) {
-              return Text('${snapshot.connectionState.name},........no data');
+              return Text('${snapshot},........no data');
             }
             var Qdata = (snapshot.data! as QuerySnapshot);
             List<Post> posts = [];
