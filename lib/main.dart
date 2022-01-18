@@ -11,11 +11,9 @@ import 'package:loginsignup/screens/splash_screen.dart';
 import 'package:loginsignup/screens/timeline.dart';
 import 'package:loginsignup/services/authentication_service.dart';
 import 'package:provider/provider.dart';
-import 'layout/navigator.dart';
 import 'screens/add_club.dart';
 import 'screens/admin_homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'services/fire_store_services.dart';
 
 var routes = <String, WidgetBuilder>{
   "/login": (BuildContext context) => Signin(),
@@ -58,14 +56,10 @@ class myapp extends StatelessWidget {
             future: _fbApp,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                log('1');
                 return Text(snapshot.error.toString());
               } else if (snapshot.hasData) {
-                log('2');
-                log(snapshot.data.toString());
-                return addClub();
+                return Feed();
               } else {
-                log('3');
                 return SplashScreen();
               }
             },
