@@ -26,8 +26,8 @@ class _FeedState extends State<Feed> {
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
-            if (snapshot.connectionState.name != 'active') {
-              return Text(snapshot.connectionState.name);
+            if (snapshot.connectionState != ConnectionState.active) {
+              return Text(snapshot.connectionState.toString());
             }
             if (!snapshot.hasData) {
               return Text('${snapshot.connectionState.name},........no data');
