@@ -27,15 +27,12 @@ var routes = <String, WidgetBuilder>{
 };
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var _fbApp = await Firebase.initializeApp();
-  runApp(myapp(_fbApp));
+  await Firebase.initializeApp();
+  runApp(myapp());
 }
 
 class myapp extends StatelessWidget {
-  Future<FirebaseApp>? _fbApp = null;
-  myapp(var _fbApp) {
-    this._fbApp = _fbApp;
-  }
+  final _fbApp = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -58,7 +55,7 @@ class myapp extends StatelessWidget {
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               } else if (snapshot.hasData) {
-                return Feed();
+                return addClub();
               } else {
                 return SplashScreen();
               }
