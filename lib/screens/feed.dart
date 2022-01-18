@@ -19,12 +19,12 @@ class _FeedState extends State<Feed> {
       appBar: Appbarwidget('Feed'),
       bottomSheet: Footerwidget(),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection("Posts").snapshots(),
+          stream: firestore,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
-            if (snapshot.connectionState != ConnectionState.done) {
+            if (snapshot.connectionState == ConnectionState.done) {
               return Text(snapshot.connectionState.toString());
             }
             if (!snapshot.hasData) {
