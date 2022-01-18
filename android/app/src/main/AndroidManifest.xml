@@ -3,6 +3,7 @@
    <application
         android:label="miu_clubs"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyA6KVnulfenZ85YZE5FMOmzWq3S_dTwJgI"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -38,6 +38,11 @@ class MyNavigator {
     Navigator.pushNamed(context, "/timeline");
   }
 
+  static void goloc(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/location_view");
+  }
+
   static void goPop(BuildContext context) {
     Navigator.pop(context);
   }
