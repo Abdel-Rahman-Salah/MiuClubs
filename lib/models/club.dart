@@ -6,9 +6,18 @@ class Club {
   String? description;
   String? mission;
   String? vision;
-  List<String>? commitees;
 
   Club(this.name, this.logopath, this.owner, this.president, this.description,
-      this.mission, this.vision, this.commitees);
+      this.mission, this.vision);
   Club.named(this.name, this.logopath);
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'logopath': logopath,
+        'owner': owner,
+        'president': president,
+        'description': description,
+        'mission': mission,
+        'vision': vision,
+      };
 }
