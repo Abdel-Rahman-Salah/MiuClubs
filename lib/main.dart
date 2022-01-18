@@ -31,13 +31,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var _fbApp = await Firebase.initializeApp();
   runApp(myapp(_fbApp));
-  FireStoreServicesx fsx = new FireStoreServicesx();
-  var x = fsx.getposts();
 }
 
 class myapp extends StatelessWidget {
-  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
-  myapp(var _fbApp) {}
+  Future<FirebaseApp>? _fbApp = null;
+  myapp(var _fbApp) {
+    this._fbApp = _fbApp;
+  }
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
