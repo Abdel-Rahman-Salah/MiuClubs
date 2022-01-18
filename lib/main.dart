@@ -63,7 +63,7 @@ class myapp extends StatelessWidget {
               } else if (snapshot.hasData) {
                 log('2');
                 log(snapshot.data.toString());
-                return SplashScreen();
+                return Feed();
               } else {
                 log('3');
                 return SplashScreen();
