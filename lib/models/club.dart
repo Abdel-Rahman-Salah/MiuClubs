@@ -11,9 +11,8 @@ class Club {
       this.mission, this.vision);
   Club.named(this.name, this.logopath);
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         'name': name,
-        'logopath': logopath,
         'owner': owner,
         'president': president,
         'description': description,

@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:loginsignup/layout/navigator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 
 class addClub extends StatefulWidget {
   const addClub({Key? key}) : super(key: key);
@@ -27,9 +29,8 @@ class addClubState extends State<addClub> {
   final myController5 = TextEditingController();
   final myController6 = TextEditingController();
 
-  final ImagePicker _picker = ImagePicker();
-  XFile? _image;
-
+  File? _image;
+  final picker = ImagePicker();
   @override
   void dispose() {
     myController.dispose();
@@ -37,14 +38,71 @@ class addClubState extends State<addClub> {
     super.dispose();
   }
 
-  Future _getImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    //final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              "Choose option",
+              style: TextStyle(color: Colors.blue),
+            ),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  Divider(
+                    height: 1,
+                    color: Colors.blue,
+                  ),
+                  ListTile(
+                    onTap: () {
+                      _openGallery(context);
+                    },
+                    title: Text("Gallery"),
+                    leading: Icon(
+                      Icons.account_box,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  Divider(
+                    height: 1,
+                    color: Colors.blue,
+                  ),
+                  ListTile(
+                    onTap: () {
+                      _openCamera(context);
+                    },
+                    title: Text("Camera"),
+                    leading: Icon(
+                      Icons.camera,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
 
-    setState(() {
-      _image = image;
-      print("image pressed");
-    });
+  // Future uploadPic(BuildContext context) async {
+  //   FirebaseStorage storage = FirebaseStorage.instance;
+  //   Reference ref = storage.ref().child("images/" + DateTime.now().toString());
+  //   UploadTask uploadTask = ref.putFile(File(_image!.path));
+
+  //   setState(() {
+  //     Scaffold.of(context)
+  //         .showSnackBar(SnackBar(content: Text('picture added')));
+  //     print("image pressed");
+  //   });
+  // }
+
+  Future uploadImageToFirebase(BuildContext context) async {
+    String fileName = basename(_image!.path);
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child('uploads/$fileName');
+
+    UploadTask uploadTask = ref.putFile(_image!);
   }
 
   @override
@@ -129,7 +187,7 @@ class addClubState extends State<addClub> {
                               ),
                               color: Colors.white,
                               onPressed: () {
-                                _getImage();
+                                _showChoiceDialog(context);
                               }),
                           decoration: BoxDecoration(
                               color: Colors.red,
@@ -359,12 +417,6 @@ class addClubState extends State<addClub> {
                                   child: Text('Create'),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                      // ScaffoldMessenger.of(context)
-                                      //     .showSnackBar(
-                                      //   const SnackBar(
-                                      //       content: Text('Processing Data')),
-                                      // );
-
                                       clubs.add({
                                         'Club_Name': myController.text,
                                         'Club_Owner': myController2.text,
@@ -373,6 +425,14 @@ class addClubState extends State<addClub> {
                                         'Club_Mission': myController5.text,
                                         'Club_Vision': myController6.text,
                                       });
+
+                                      uploadImageToFirebase(context);
+
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text('Club Added')),
+                                      );
                                     }
                                     print(myController.text);
                                     print(myController2.text);
@@ -388,5 +448,24 @@ class addClubState extends State<addClub> {
             );
           }),
     );
+  }
+
+  void _openGallery(BuildContext context) async {
+    final pickedFile = await picker.getImage(
+      source: ImageSource.gallery,
+    );
+    setState(() {
+      _image = File(pickedFile!.path);
+    });
+
+    Navigator.pop(context);
+  }
+
+  void _openCamera(BuildContext context) async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      _image = File(pickedFile!.path);
+    });
+    Navigator.pop(context);
   }
 }
