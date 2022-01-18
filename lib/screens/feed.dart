@@ -24,8 +24,10 @@ class _FeedState extends State<Feed> {
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Text(snapshot.connectionState.toString());
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Text((snapshot.data! as QuerySnapshot)
+                  .docs[0]['title']
+                  .toString());
             }
             if (!snapshot.hasData) {
               return Text(snapshot.data.toString());
