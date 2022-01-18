@@ -1,26 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/imports.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Feed extends StatelessWidget {
+class Feed extends StatefulWidget {
+  @override
+  State<Feed> createState() => _FeedState();
+}
+
+class _FeedState extends State<Feed> {
+  Stream<QuerySnapshot<Map<String, dynamic>>> firestore =
+      FirebaseFirestore.instance.collection('Posts').snapshots();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawerwidget(),
       appBar: Appbarwidget('Feed'),
       bottomSheet: Footerwidget(),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 40),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Post('Egycon', 'post1.png'),
-              Post('Recruitment', 'post2.png'),
-              Post('gaming festival', 'post1.png'),
-              Post('season end', 'post2.png')
-            ],
-          ),
-        ),
-      ),
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection("Posts").snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Text(snapshot.connectionState.toString());
+            }
+            if (!snapshot.hasData) {
+              return Text(snapshot.data.toString());
+            }
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 40),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Post('Egycon', 'post1.png'),
+                    Post('Recruitment', 'post2.png'),
+                    Post('gaming festival', 'post1.png'),
+                    Post('season end', 'post2.png')
+                  ],
+                ),
+              ),
+            );
+          }),
     );
   }
 }
