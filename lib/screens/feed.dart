@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/imports.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -24,24 +26,24 @@ class _FeedState extends State<Feed> {
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
-            if (snapshot.connectionState != ConnectionState.done) {
-              return Text((snapshot.data! as QuerySnapshot)
-                  .docs[0]['title']
-                  .toString());
+            if (snapshot.connectionState.name != 'active') {
+              return Text(snapshot.connectionState.name);
             }
             if (!snapshot.hasData) {
-              return Text(snapshot.data.toString());
+              return Text('${snapshot.connectionState.name},........no data');
+            }
+            var Qdata = (snapshot.data! as QuerySnapshot);
+            List<Post> posts = [];
+            for (int i = 0; i < Qdata.docs.length; i++) {
+              String titleR = Qdata.docs[i]['title'].toString();
+              String descR = Qdata.docs[i]['description'].toString();
+              posts.add(Post(titleR, 'post${i + 1}.png', descR));
             }
             return Padding(
               padding: const EdgeInsets.only(bottom: 40),
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    Post('Egycon', 'post1.png'),
-                    Post('Recruitment', 'post2.png'),
-                    Post('gaming festival', 'post1.png'),
-                    Post('season end', 'post2.png')
-                  ],
+                  children: posts,
                 ),
               ),
             );
@@ -53,9 +55,11 @@ class _FeedState extends State<Feed> {
 class Post extends StatelessWidget {
   String? title;
   String? image;
-  Post(String title, String image) {
+  String? description;
+  Post(String title, String image, String description) {
     this.title = title;
     this.image = image;
+    this.description = description;
   }
   @override
   Widget build(BuildContext context) {
@@ -93,7 +97,7 @@ class Post extends StatelessWidget {
                   children: [
                     Flexible(
                         child: Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+                      description!,
                       style: TextStyle(fontSize: 15),
                     )),
                   ],
