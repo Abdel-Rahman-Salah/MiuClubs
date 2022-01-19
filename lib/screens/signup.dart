@@ -271,7 +271,6 @@ class _CheckerBoxState extends State<CheckerBox> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -421,5 +420,69 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
         ),
       ],
     );
+  }
+}
+
+void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()})
+            .catchError((e) {
+          Fluttertoast.showToast(msg: e.message);
+        });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errormsg = "Your email address appears to be malformed.";
+            break;
+          case "wrong-password":
+            errormsg = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errormsg = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errormsg = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errormsg = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errormsg = "Signing in with Email and Password is not enabled.";
+            break;
+          default:
+            errormsg = "An undefined Error happened.";
+        }
+        Fluttertoast.showToast(msg: errormsg);
+        print(error.code);
+      }
+    }
+  }
+
+  postDetailsToFirestore() async {
+    // calling firestore and user model, sending values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    User userModel = User();
+
+    // writing values
+    userModel.name = myController.text;
+    userModel.email = myController2.text;
+    userModel.password = myController3.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap(userModel));
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => Timeline()),
+        (route) => false);
   }
 }
