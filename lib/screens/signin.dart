@@ -107,8 +107,9 @@ class _SigninState extends State<Signin> {
                       controller: myController2,
                       autofocus: false,
                       validator: (value) {
+                        RegExp regExp = RegExp(r'^.{8,}$');
                         if (value == null || value.isEmpty)
-                          return 'Please enter password';
+                          return ("Please enter your password");
                         return null;
                       },
                       style: new TextStyle(fontSize: 12.0),
@@ -274,3 +275,4 @@ class _CheckerBoxState extends State<CheckerBox> {
     );
   }
 }
+
