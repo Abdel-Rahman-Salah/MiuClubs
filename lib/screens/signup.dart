@@ -111,7 +111,11 @@ class _SignUpState extends State<SignUp> {
                       autofocus: false,
                       validator: (value) {
                         if (value == null || value.isEmpty)
-                          return 'Please enter Email';
+                          return 'Please enter your Email';
+                        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                            .hasMatch(value)) {
+                          return ("Please enter a valid email");
+                        }
                         return null;
                       },
                       style: new TextStyle(fontSize: 12.0),
@@ -148,8 +152,12 @@ class _SignUpState extends State<SignUp> {
                       obscureText: _isHidden,
                       controller: myController3,
                       validator: (value) {
+                        RegExp regExp = RegExp(r'^.{8,}$');
                         if (value == null || value.isEmpty)
                           return 'Please enter Password';
+                        if (!regExp.hasMatch(value)) {
+                          return ("Enter valid password min 8 characters ");
+                        }
                         return null;
                       },
                       style: new TextStyle(fontSize: 12.0),
@@ -262,6 +270,7 @@ class _CheckerBoxState extends State<CheckerBox> {
     isCheck = false;
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
