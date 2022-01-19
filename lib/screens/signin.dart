@@ -276,3 +276,35 @@ class _CheckerBoxState extends State<CheckerBox> {
   }
 }
 
+void signIn(String email, String password) async {
+  if (_formKey.currentState!.validate()) {
+    try {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Timeline())),
+              });
+    } on FirebaseAuthException catch (error) {
+      switch (error.code) {
+        case "invalid-email":
+          errormsg = "Wrong email address.";
+          break;
+        case "wrong-password":
+          errormsg = "Wrong password.";
+          break;
+        case "user-not-found":
+          errormsg = "User with this email doesn't exist.";
+          break;
+        case "operation-not-allowed":
+          errormsg = "Signing in with Email and Password is not enabled.";
+          break;
+        default:
+          errormsg = "An undefined Error happened.";
+      }
+      Fluttertoast.showToast(msg: errormsg);
+      print(error.code);
+    }
+  }
+}
