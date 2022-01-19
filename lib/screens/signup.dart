@@ -21,7 +21,8 @@ class _SignUpState extends State<SignUp> {
   final myController = TextEditingController();
   final myController2 = TextEditingController();
   final myController3 = TextEditingController();
-  final myController4 = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  late String errorMessage;
   @override
   void dispose() {
     myController.dispose();
