@@ -21,12 +21,15 @@ class _SigninState extends State<Signin> {
 
   final myController = TextEditingController();
   final myController2 = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  late String errormsg;
   @override
   void dispose() {
     myController.dispose();
     myController2.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
