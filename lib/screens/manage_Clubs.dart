@@ -7,10 +7,7 @@ import 'package:loginsignup/screens/manage_Clubs.dart';
 import 'package:provider/provider.dart';
 import '../models/club.dart';
 
-void main() {
-  runApp(MyApp());
-  
-}
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -24,7 +21,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ManageClubs extends StatelessWidget {
-  
+   ClubsProvider data=ClubsProvider();
+
   @override
    Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +51,8 @@ class ManageClubs extends StatelessWidget {
           ),
           Expanded(
             child: Consumer<ClubsProvider>(
-               builder: (context, ClubsProvider data, child) {
+               builder: (context,  data, child) {
+                data.readMap();
                 return ListView.builder(
                 itemCount: data.getClubs.length,
                 itemBuilder: (context, int index) {
