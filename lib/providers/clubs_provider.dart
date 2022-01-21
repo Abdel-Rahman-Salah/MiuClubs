@@ -1,10 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import '../models/club.dart';
-
+import '../services/fire_store_services.dart';
 class ClubsProvider extends ChangeNotifier {
   //Clubs List
+  
   List<Club> _clubs = <Club>[];
-
+   late FireStoreServicesx instance = FireStoreServicesx(); 
+    readMap() async {
+     var clubsMap = await instance.getClubs();
+     for(int i=0;i<clubsMap.length;i++)
+     {
+        Club c=Club.named(clubsMap[i]['Club_Name'], clubsMap[i]['Club_Image']);
+       _clubs.add(c);
+     }
+    notifyListeners();
+    }
   List<Club> get getClubs {
     return _clubs;
   }
