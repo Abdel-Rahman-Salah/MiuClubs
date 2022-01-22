@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loginsignup/providers/clubs_provider.dart';
 import 'package:loginsignup/screens/feed.dart';
 import 'package:loginsignup/screens/location_view.dart';
 import 'package:loginsignup/screens/manage_clubs.dart';
@@ -42,6 +41,7 @@ class myapp extends StatelessWidget {
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
+        ChangeNotifierProvider(create: (context) => ClubsProvider()),
         StreamProvider(
             create: (context) =>
                 context.read<AuthenticationService>().authStateChanges,
