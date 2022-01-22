@@ -14,16 +14,15 @@ class SignUp extends StatefulWidget {
   @override
   State<SignUp> createState() => _SignUpState();
 }
-
-class _SignUpState extends State<SignUp> {
   bool _isHidden = true;
   final _formKey = GlobalKey<FormState>();
-
   final myController = TextEditingController();
   final myController2 = TextEditingController();
   final myController3 = TextEditingController();
   final _auth = FirebaseAuth.instance;
   late String errorMessage;
+class _SignUpState extends State<SignUp> {
+
   @override
   void dispose() {
     myController.dispose();
@@ -481,9 +480,6 @@ void signUp(String email, String password) async {
         .set(userModel.toMap(userModel));
     Fluttertoast.showToast(msg: "Account created successfully :) ");
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => Timeline()),
-        (route) => false);
+    
   }
 }
