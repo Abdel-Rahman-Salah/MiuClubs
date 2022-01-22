@@ -7,7 +7,10 @@ import 'package:loginsignup/layout/navigator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:loginsignup/providers/clubs_provider.dart';
+import 'package:loginsignup/services/fire_store_services.dart';
 import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 
 class addClub extends StatefulWidget {
   const addClub({Key? key}) : super(key: key);
@@ -89,19 +92,19 @@ class addClubState extends State<addClub> {
     String fileName = basename(_image!.path);
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child('uploads/$fileName');
-
     UploadTask uploadTask = ref.putFile(_image!);
-    var url;
-    //uploadTask.whenComplete(() {
-    url = ref.getDownloadURL();
-    //}).catchError((onError) {
-    //print(onError);
-    //});
-    return url;
+
+    var downloadURL =
+        (await (await uploadTask.whenComplete(() => ref.getDownloadURL()))
+                .ref
+                .getDownloadURL())
+            .toString();
+    return downloadURL;
   }
 
   @override
   Widget build(BuildContext context) {
+    ClubsProvider data = ClubsProvider();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
@@ -216,6 +219,11 @@ class addClubState extends State<addClub> {
                                       return 'Please enter the club name';
                                     return null;
                                   },
+                                  onChanged: (value) {
+                                    Provider.of<ClubsProvider>(context,
+                                            listen: false)
+                                        .changeName(value);
+                                  },
                                   style: new TextStyle(
                                       fontSize: 12.0, color: Color(0xFFbdc6cf)),
                                   decoration: new InputDecoration(
@@ -246,6 +254,11 @@ class addClubState extends State<addClub> {
                                     if (value == null || value.isEmpty)
                                       return 'Please enter the club Owner name';
                                     return null;
+                                  },
+                                  onChanged: (value) {
+                                    Provider.of<ClubsProvider>(context,
+                                            listen: false)
+                                        .changeOwner(value);
                                   },
                                   style: new TextStyle(
                                       fontSize: 12.0, color: Color(0xFFbdc6cf)),
@@ -278,6 +291,11 @@ class addClubState extends State<addClub> {
                                       return 'Please enter the club president name';
                                     return null;
                                   },
+                                  onChanged: (value) {
+                                    Provider.of<ClubsProvider>(context,
+                                            listen: false)
+                                        .changePresident(value);
+                                  },
                                   style: new TextStyle(
                                       fontSize: 12.0, color: Color(0xFFbdc6cf)),
                                   decoration: new InputDecoration(
@@ -308,6 +326,11 @@ class addClubState extends State<addClub> {
                                     if (value == null || value.isEmpty)
                                       return 'Please enter the club description';
                                     return null;
+                                  },
+                                  onChanged: (value) {
+                                    Provider.of<ClubsProvider>(context,
+                                            listen: false)
+                                        .changeDescription(value);
                                   },
                                   maxLines: 7,
                                   style: new TextStyle(
@@ -341,6 +364,11 @@ class addClubState extends State<addClub> {
                                       return 'Please enter the club mission';
                                     return null;
                                   },
+                                  onChanged: (value) {
+                                    Provider.of<ClubsProvider>(context,
+                                            listen: false)
+                                        .changeMission(value);
+                                  },
                                   maxLines: 7,
                                   style: new TextStyle(
                                       fontSize: 12.0, color: Color(0xFFbdc6cf)),
@@ -372,6 +400,11 @@ class addClubState extends State<addClub> {
                                     if (value == null || value.isEmpty)
                                       return 'Please enter the club vision';
                                     return null;
+                                  },
+                                  onChanged: (value) {
+                                    Provider.of<ClubsProvider>(context,
+                                            listen: false)
+                                        .changeVision(value);
                                   },
                                   maxLines: 7,
                                   style: new TextStyle(
@@ -412,17 +445,12 @@ class addClubState extends State<addClub> {
                                   child: Text('Create'),
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      String url =
+                                      var url =
                                           await uploadImageToFirebase(context);
-                                      clubs.add({
-                                        'Club_Name': myController.text,
-                                        'Club_Owner': myController2.text,
-                                        'Club_Image': url,
-                                        'Club_President': myController3.text,
-                                        'Club_Description': myController4.text,
-                                        'Club_Mission': myController5.text,
-                                        'Club_Vision': myController6.text,
-                                      });
+                                      //var url = 'test.png';
+                                      Provider.of<ClubsProvider>(context,
+                                              listen: false)
+                                          .saveClub(url);
 
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

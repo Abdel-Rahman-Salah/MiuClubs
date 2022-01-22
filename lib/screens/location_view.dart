@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:loginsignup/layout/imports.dart';
 import 'package:loginsignup/models/locations.dart' as locations;
 
 class locationview extends StatefulWidget {
@@ -32,6 +33,7 @@ class locationviewState extends State<locationview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawerwidget(),
       appBar: AppBar(
         title: const Text('Maps Sample Page'),
         backgroundColor: Colors.red[700],
