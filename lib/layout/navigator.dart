@@ -43,6 +43,11 @@ class MyNavigator {
     Navigator.pushNamed(context, "/location_view");
   }
 
+  static void goclubrequest(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/club_requests");
+  }
+
   static void goPop(BuildContext context) {
     Navigator.pop(context);
   }

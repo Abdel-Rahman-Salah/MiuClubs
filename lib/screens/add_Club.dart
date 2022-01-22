@@ -104,7 +104,6 @@ class addClubState extends State<addClub> {
 
   @override
   Widget build(BuildContext context) {
-    ClubsProvider data = ClubsProvider();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),

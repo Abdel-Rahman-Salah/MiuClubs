@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/providers/clubs_provider.dart';
+import 'package:loginsignup/screens/club_requests.dart';
 import 'package:loginsignup/screens/feed.dart';
 import 'package:loginsignup/screens/location_view.dart';
 import 'package:loginsignup/screens/manage_clubs.dart';
@@ -10,7 +11,9 @@ import 'package:loginsignup/screens/signin_admin.dart';
 import 'package:loginsignup/screens/splash_screen.dart';
 import 'package:loginsignup/screens/timeline.dart';
 import 'package:loginsignup/services/authentication_service.dart';
+import 'package:loginsignup/services/fire_store_services.dart';
 import 'package:provider/provider.dart';
+import 'models/club.dart';
 import 'screens/add_club.dart';
 import 'screens/admin_homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +28,7 @@ var routes = <String, WidgetBuilder>{
   "/profile": (BuildContext context) => ClubProfile(),
   "/timeline": (BuildContext context) => Timeline(),
   "/location_view": (BuildContext context) => locationview(),
+  "/club_requests": (BuildContext context) => ClubRequests(),
 };
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,8 +38,10 @@ void main() async {
 
 class myapp extends StatelessWidget {
   final _fbApp = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
+    final firestoreService = FireStoreServicesx();
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
@@ -45,7 +51,11 @@ class myapp extends StatelessWidget {
         StreamProvider(
             create: (context) =>
                 context.read<AuthenticationService>().authStateChanges,
-            initialData: null)
+            initialData: null),
+        StreamProvider<List<Club>>(
+          create: (context) => firestoreService.getClub(),
+          initialData: [],
+        ),
       ],
       child: MaterialApp(
           theme: ThemeData(

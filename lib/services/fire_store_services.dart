@@ -26,6 +26,16 @@ class FireStoreServicesx {
     return data;
   }
 
+  Stream<List<Club>> getClub() {
+    return FirebaseFirestore.instance.collection('clubs').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((document) => Club.fromFirestore(document.data()))
+            .toList());
+  }
+
+  Stream get allClubs =>
+      FirebaseFirestore.instance.collection("clubs").snapshots();
+
   static saveClub(Club club) async {
     return FirebaseFirestore.instance
         .collection('clubs')
