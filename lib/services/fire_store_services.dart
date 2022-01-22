@@ -15,7 +15,7 @@ class FireStoreServicesx {
   }
 
   CollectionReference clubsCollection =
-      FirebaseFirestore.instance.collection('Clubs');
+      FirebaseFirestore.instance.collection('clubs');
 
   Future<List> getClubs() async {
     QuerySnapshot querySnapshot = await clubsCollection.get();

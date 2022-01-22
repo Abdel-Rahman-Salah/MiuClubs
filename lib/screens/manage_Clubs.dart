@@ -7,24 +7,20 @@ import 'package:loginsignup/screens/manage_Clubs.dart';
 import 'package:provider/provider.dart';
 import '../models/club.dart';
 
-
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ClubsProvider(),
-      child: MaterialApp(title: 'Provider Demo', home: ManageClubs()),
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => ClubsProvider(),
+//       child: MaterialApp(title: 'Provider Demo', home: ManageClubs()),
+//     );
+//   }
+// }
 
 class ManageClubs extends StatelessWidget {
-   ClubsProvider data=ClubsProvider();
-
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
@@ -50,10 +46,9 @@ class ManageClubs extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Consumer<ClubsProvider>(
-               builder: (context,  data, child) {
-                data.readMap();
-                return ListView.builder(
+            child: Consumer<ClubsProvider>(builder: (context, data, child) {
+              data.readMap();
+              return ListView.builder(
                 itemCount: data.getClubs.length,
                 itemBuilder: (context, int index) {
                   {
@@ -71,10 +66,11 @@ class ManageClubs extends StatelessWidget {
                             maxWidth: 64,
                             maxHeight: 64,
                           ),
-                          child: Image.asset(
-                            'assets/images/$path',
-                            fit: BoxFit.cover,
-                          ),
+                          // child: Image.asset(
+                          //   'assets/images/$path',
+                          //   fit: BoxFit.cover,
+                          // ),
+                          child: Image.network(path),
                         ),
                         trailing: Wrap(
                           spacing: 20,
@@ -89,8 +85,9 @@ class ManageClubs extends StatelessWidget {
                                 )),
                             OutlinedButton(
                                 onPressed: () {
-                                  Provider.of<ClubsProvider>(context, listen: false)
-                                  .removeClubs(index);
+                                  Provider.of<ClubsProvider>(context,
+                                          listen: false)
+                                      .removeClubs(index);
                                 },
                                 child: Icon(
                                   Icons.delete_rounded,
@@ -113,8 +110,7 @@ class ManageClubs extends StatelessWidget {
                   }
                 },
               );
-              }        
-            ),
+            }),
           ),
           IconButton(
             onPressed: () {

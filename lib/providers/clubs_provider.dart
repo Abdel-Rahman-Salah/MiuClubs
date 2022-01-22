@@ -14,7 +14,6 @@ class ClubsProvider extends ChangeNotifier {
   String? _mission;
   String? _vision;
   String? _description;
-
   var uuid = Uuid();
 
 //Getters
@@ -57,14 +56,9 @@ class ClubsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  changeLogopath(String value) {
-    _logopath = value;
-    notifyListeners();
-  }
-
   loadValues(Club club) {
     _name = club.name;
-    //_logopath = club.logopath;
+    _logopath = club.logopath;
     _clubId = club.clubId;
     _president = club.president;
     _owner = club.owner;
@@ -73,27 +67,27 @@ class ClubsProvider extends ChangeNotifier {
   }
 
   late FireStoreServicesx instance = FireStoreServicesx();
-  // readMap() async {
-  //   var clubsMap = await instance.getClubs();
-  //   for (int i = 0; i < clubsMap.length; i++) {
-  //     Club c = Club.named(clubsMap[i]['Club_Name'], clubsMap[i]['Club_Image']);
-  //     _clubs.add(c);
-  //   }
-  //   notifyListeners();
-  // }
+  readMap() async {
+    var clubsMap = await instance.getClubs();
+    for (int i = 0; i < clubsMap.length; i++) {
+      Club c = Club.named(clubsMap[i]['name'], clubsMap[i]['logopath']);
+      _clubs.add(c);
+    }
+    notifyListeners();
+  }
 
   List<Club> get getClubs {
     return _clubs;
   }
 
 // function to add data to list of clubs
-  // void addClubs(String name, String logopath) {
-  //   Club club = new Club.named(name, logopath);
+  void addClubs(String name, String logopath) {
+    Club club = new Club.named(name, logopath);
 
-  //   _clubs.add(club);
+    _clubs.add(club);
 
-  //   notifyListeners();
-  // }
+    notifyListeners();
+  }
 
   // function to remove or delete clubs by using list index position
   void removeClubs(int index) {
