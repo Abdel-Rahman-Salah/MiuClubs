@@ -195,7 +195,9 @@ class AdminHomePageState extends State<AdminHomePage> {
                                         size: 30,
                                       ),
                                       color: Colors.white,
-                                      onPressed: () {}),
+                                      onPressed: () {
+                                        MyNavigator.goclubrequest(context);
+                                      }),
                                 )),
                             Flexible(
                               flex: 2,
