@@ -16,20 +16,19 @@ class Signin extends StatefulWidget {
   State<Signin> createState() => _SigninState();
 }
 
-class _SigninState extends State<Signin> {
-  final _formKey = GlobalKey<FormState>();
+final _formKey = GlobalKey<FormState>();
+final myController = TextEditingController();
+final myController2 = TextEditingController();
+final _auth = FirebaseAuth.instance;
+late String errormsg;
 
-  final myController = TextEditingController();
-  final myController2 = TextEditingController();
-  final _auth = FirebaseAuth.instance;
-  late String errormsg;
+class _SigninState extends State<Signin> {
   @override
   void dispose() {
     myController.dispose();
     myController2.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -283,8 +282,6 @@ void signIn(String email, String password) async {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Timeline())),
               });
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
