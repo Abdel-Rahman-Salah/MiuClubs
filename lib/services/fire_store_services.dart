@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FireStoreServicesx {
   static var uid = FirebaseAuth.instance.currentUser!.uid;
-  var posts = FirebaseFirestore.instance.collection('Posts');
+  var posts = FirebaseFirestore.instance;
 
   Future<void> getposts() async {
     try {
