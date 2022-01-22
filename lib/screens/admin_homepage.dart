@@ -195,12 +195,14 @@ class AdminHomePageState extends State<AdminHomePage> {
                                         size: 30,
                                       ),
                                       color: Colors.white,
-                                      onPressed: () {}),
+                                      onPressed: () {
+                                        MyNavigator.goclubrequest(context);
+                                      }),
                                 )),
                             Flexible(
                               flex: 2,
                               child: Text(
-                                'Delete Clubs',
+                                'View Club Requests',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14.0,

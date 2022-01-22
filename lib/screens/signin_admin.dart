@@ -2,27 +2,22 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/constant.dart';
 import 'package:loginsignup/layout/navigator.dart';
-import 'package:loginsignup/screens/signin_admin.dart';
+import 'package:loginsignup/screens/signin.dart';
 import 'package:loginsignup/screens/signup.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:loginsignup/screens/timeline.dart';
 import 'package:loginsignup/screens/feed.dart';
 
-class Signin extends StatefulWidget {
-  const Signin({Key? key}) : super(key: key);
+class SigninAdmin extends StatefulWidget {
+  const SigninAdmin({Key? key}) : super(key: key);
 
   @override
-  State<Signin> createState() => _SigninState();
+  State<SigninAdmin> createState() => _SigninAdminState();
 }
 
-final _formKey = GlobalKey<FormState>();
-final myController = TextEditingController();
-final myController2 = TextEditingController();
-final _auth = FirebaseAuth.instance;
-late String errormsg;
+class _SigninAdminState extends State<SigninAdmin> {
+  final _formKey = GlobalKey<FormState>();
 
-class _SigninState extends State<Signin> {
+  final myController = TextEditingController();
+  final myController2 = TextEditingController();
   @override
   void dispose() {
     myController.dispose();
@@ -106,9 +101,8 @@ class _SigninState extends State<Signin> {
                       controller: myController2,
                       autofocus: false,
                       validator: (value) {
-                        RegExp regExp = RegExp(r'^.{8,}$');
                         if (value == null || value.isEmpty)
-                          return ("Please enter your password");
+                          return 'Please enter password';
                         return null;
                       },
                       style: new TextStyle(fontSize: 12.0),
@@ -152,7 +146,7 @@ class _SigninState extends State<Signin> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        MyNavigator.gofeed(context);
+                        MyNavigator.goToAdminHomepage(context);
                       }
                       print(myController.text);
                       print(myController2.text);
@@ -179,41 +173,17 @@ class _SigninState extends State<Signin> {
                   Container(
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.149,
-                        top: MediaQuery.of(context).size.height * 0.01),
+                        top: MediaQuery.of(context).size.height * 0.03),
                     child: Text.rich(
                       TextSpan(
-                          text: "Don't Have An Account? ",
-                          style: TextStyle(
-                              color: grayshade.withOpacity(0.8), fontSize: 16),
-                          children: [
-                            TextSpan(
-                                text: "Sign Up",
-                                style: TextStyle(color: red, fontSize: 16),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => SignUp()));
-                                    print("Sign Up click");
-                                  }),
-                          ]),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.149,
-                    ),
-                    child: Text.rich(
-                      TextSpan(
-                          text: "Sign in As Admin",
+                          text: "Sign in As User",
                           style: TextStyle(color: red, fontSize: 16),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SigninAdmin()));
+                                      builder: (context) => Signin()));
                               print("Sign Up click");
                             }),
                     ),
@@ -272,36 +242,5 @@ class _CheckerBoxState extends State<CheckerBox> {
         ],
       ),
     );
-  }
-}
-
-void signIn(String email, String password) async {
-  if (_formKey.currentState!.validate()) {
-    try {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful"),
-              });
-    } on FirebaseAuthException catch (error) {
-      switch (error.code) {
-        case "invalid-email":
-          errormsg = "Wrong email address.";
-          break;
-        case "wrong-password":
-          errormsg = "Wrong password.";
-          break;
-        case "user-not-found":
-          errormsg = "User with this email doesn't exist.";
-          break;
-        case "operation-not-allowed":
-          errormsg = "Signing in with Email and Password is not enabled.";
-          break;
-        default:
-          errormsg = "An undefined Error happened.";
-      }
-      Fluttertoast.showToast(msg: errormsg);
-      print(error.code);
-    }
   }
 }

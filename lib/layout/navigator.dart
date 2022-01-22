@@ -5,7 +5,11 @@ import 'package:loginsignup/screens/profile.dart';
 
 class MyNavigator {
   static void GoLogin(BuildContext context) {
-    Navigator.pushNamed(context, "/login");
+    Navigator.pushReplacementNamed(context, "/login");
+  }
+
+  static void GoLoginAdmin(BuildContext context) {
+    Navigator.pushNamed(context, "/loginadmin");
   }
 
   static void goToAdminHomepage(BuildContext context) {
@@ -20,15 +24,31 @@ class MyNavigator {
     Navigator.pushNamed(context, "/manage");
   }
 
-  static void gologin(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-  }
-
   static void gofeed(BuildContext context) {
-    Navigator.pushNamed(context, "/feed");
+    Navigator.pushReplacementNamed(context, "/feed");
   }
 
   static void goprofile(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/profile");
+  }
+
+  static void goTimeline(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/timeline");
+  }
+
+  static void goloc(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/location_view");
+  }
+
+  static void goclubrequest(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/club_requests");
+  }
+
+  static void goPop(BuildContext context) {
+    Navigator.pop(context);
   }
 }

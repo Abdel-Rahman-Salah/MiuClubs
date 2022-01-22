@@ -32,7 +32,15 @@ class Footerwidget extends StatelessWidget {
   }
 }
 
+class Nemo {
+  static const String pageF = '/feed';
+  static const String pageP = '/profile';
+  static const String pageG = '/gallery';
+}
+
 class Drawerwidget extends StatelessWidget {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  String? _currentPage;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -50,7 +58,10 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
-              onTap: () => MyNavigator.gofeed(context),
+              onTap: () {
+                Navigator.of(context).pop();
+                MyNavigator.gofeed(context);
+              },
               title: Text(
                 'Feed',
                 style: TextStyle(
@@ -61,6 +72,9 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
+              onTap: () {
+                MyNavigator.goTimeline(context);
+              },
               title: Text(
                 'TimeLine',
                 style: TextStyle(
@@ -71,7 +85,9 @@ class Drawerwidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ListTile(
-              onTap: () => MyNavigator.goprofile(context),
+              onTap: () {
+                MyNavigator.goprofile(context);
+              },
               title: Text(
                 'Profile',
                 style: TextStyle(
@@ -84,6 +100,19 @@ class Drawerwidget extends StatelessWidget {
             child: ListTile(
               title: Text(
                 'Gallery',
+                style: TextStyle(
+                    fontSize: 24, color: Color.fromRGBO(254, 3, 3, 1.0)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ListTile(
+              onTap: () {
+                MyNavigator.goloc(context);
+              },
+              title: Text(
+                'Location',
                 style: TextStyle(
                     fontSize: 24, color: Color.fromRGBO(254, 3, 3, 1.0)),
               ),
@@ -108,7 +137,7 @@ class Appbarwidget extends StatelessWidget with PreferredSizeWidget {
             style: ElevatedButton.styleFrom(
                 primary: Color.fromRGBO(51, 51, 51, 1.0),
                 onPrimary: Color.fromRGBO(254, 3, 3, 1.0)),
-            onPressed: () => MyNavigator.gologin(context),
+            onPressed: () => Navigator.pop(context),
             child: Icon(Icons.logout))
       ],
       bottom: PreferredSize(
