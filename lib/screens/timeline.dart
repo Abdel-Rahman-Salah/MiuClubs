@@ -8,6 +8,7 @@ class Timeline extends StatelessWidget {
       drawer: Drawerwidget(),
       appBar: Appbarwidget('Timeline'),
       bottomSheet: Footerwidget(),
+
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -40,3 +41,4 @@ class Timeline extends StatelessWidget {
     );
   }
 }
+
