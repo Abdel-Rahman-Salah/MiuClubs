@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loginsignup/models/club.dart';
+import '../models/event.dart';
 
 class FireStoreServicesx {
   static var uid = FirebaseAuth.instance.currentUser!.uid;
@@ -33,15 +34,6 @@ class FireStoreServicesx {
             .toList());
   }
 
-  Stream<List<Club>> getClubRequests() {
-    return FirebaseFirestore.instance
-        .collection('club_requests')
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((document) => Club.RequestsfromFirestore(document.data()))
-            .toList());
-  }
-
   Stream get allClubs =>
       FirebaseFirestore.instance.collection("clubs").snapshots();
 
@@ -52,21 +44,33 @@ class FireStoreServicesx {
         .set(club.toMap());
   }
 
-  static requestClub(Club club) async {
-    return FirebaseFirestore.instance
-        .collection('club_requests')
-        .doc(club.clubId)
-        .set(club.reqtoMap());
+//Events
+  CollectionReference eventsCollection =
+      FirebaseFirestore.instance.collection('events');
+
+  Future<List> getEvents() async {
+    QuerySnapshot querySnapshot = await eventsCollection.get();
+
+    final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    log('$data');
+    return data;
   }
 
-  static removeClub(String clubId) async {
-    return FirebaseFirestore.instance.collection('clubs').doc(clubId).delete();
+  Stream<List<Club>> getEvent() {
+    return FirebaseFirestore.instance.collection('events').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((document) => Club.fromFirestore(document.data()))
+            .toList());
   }
 
-  static removeRequestClub(String clubId) async {
+  Stream get allEvents =>
+      FirebaseFirestore.instance.collection("events").snapshots();
+
+  static saveEvent(Event event) async {
     return FirebaseFirestore.instance
-        .collection('club_requests')
-        .doc(clubId)
-        .delete();
+        .collection('events')
+        .doc(event.eventId)
+        .set(event.toMap());
   }
 }

@@ -58,6 +58,20 @@ class Drawerwidget extends StatelessWidget {
             child: ListTile(
               onTap: () {
                 Navigator.of(context).pop();
+                MyNavigator.goNotifications(context);
+              },
+              title: Text(
+                'Notifications',
+                style: TextStyle(
+                    fontSize: 24, color: Color.fromRGBO(254, 3, 3, 1.0)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ListTile(
+              onTap: () {
+                Navigator.of(context).pop();
                 MyNavigator.gofeed(context);
               },
               title: Text(

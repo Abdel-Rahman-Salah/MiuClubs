@@ -66,8 +66,13 @@ class _SigninState extends State<Signin> {
                       controller: myController5,
                       autofocus: false,
                       validator: (value) {
-                        if (value == null || value.isEmpty)
-                          return 'Please enter Email';
+                        if (value!.isEmpty) {
+                          return ("Please enter your email");
+                        }
+                        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                            .hasMatch(value)) {
+                          return ("Enter a valid email");
+                        }
                         return null;
                       },
                       style: new TextStyle(fontSize: 12.0),
@@ -254,19 +259,22 @@ void signIn(BuildContext context) async {
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
         case "invalid-email":
-          errormsg = "Wrong email address.";
+          errormsg = "Your email address appears to be invalid!";
           break;
         case "wrong-password":
-          errormsg = "Wrong password.";
+          errormsg = "Wrong password!";
           break;
         case "user-not-found":
-          errormsg = "User with this email doesn't exist.";
+          errormsg = "User with this email doesn't exist!";
+          break;
+        case "too-many-requests":
+          errormsg = "Too many requests!";
           break;
         case "operation-not-allowed":
-          errormsg = "Signing in with Email and Password is not enabled.";
+          errormsg = "Signing in with Email and Password is not enabled!";
           break;
         default:
-          errormsg = "An undefined Error happened.";
+          errormsg = "An undefined Error happened!";
       }
       Fluttertoast.showToast(msg: errormsg);
       print(error.code);

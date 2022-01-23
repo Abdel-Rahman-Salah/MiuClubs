@@ -11,6 +11,8 @@ import 'package:loginsignup/screens/manage_clubs.dart';
 import 'package:loginsignup/screens/profile.dart';
 import 'package:loginsignup/screens/request_club.dart';
 import 'package:loginsignup/screens/signin.dart';
+import 'package:loginsignup/screens/signin_admin.dart';
+import 'package:loginsignup/screens/notifications.dart';
 import 'package:loginsignup/screens/splash_screen.dart';
 import 'package:loginsignup/screens/timeline.dart';
 import 'package:loginsignup/services/authentication_service.dart';

@@ -1,10 +1,12 @@
 // ignore: file_names
 import 'dart:io';
 import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loginsignup/layout/navigator.dart';
+import 'package:loginsignup/models/user.dart';
 import 'package:loginsignup/providers/clubs_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:path/path.dart';
@@ -95,6 +97,8 @@ class requestClubState extends State<requestClub> {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseuser = context.watch<User?>();
+    print(firebaseuser!.uid);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
@@ -409,7 +413,7 @@ class requestClubState extends State<requestClub> {
                                     .requestClub(url);
 
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Club Added')),
+                                  const SnackBar(content: Text('Request sent')),
                                 );
                               }
                             },

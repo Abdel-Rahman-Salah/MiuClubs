@@ -149,9 +149,9 @@ class _SignUpState extends State<SignUp> {
                       validator: (value) {
                         RegExp regExp = RegExp(r'^.{8,}$');
                         if (value == null || value.isEmpty)
-                          return 'Please enter Password';
+                          return 'Please enter a Password';
                         if (!regExp.hasMatch(value)) {
-                          return ("Enter valid password min 8 characters ");
+                          return ("Please enter a valid password with a minimum of 8 characters ");
                         }
                         return null;
                       },
@@ -301,7 +301,6 @@ class _CheckerBoxState extends State<CheckerBox> {
   }
 }
 
-// ignore: must_be_immutable
 class InputField extends StatelessWidget {
   String headerText;
   String hintTexti;
@@ -432,25 +431,25 @@ void signUp(BuildContext context) async {
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
         case "invalid-email":
-          errormsg = "Your email address appears to be malformed.";
+          errormsg = "Your email address appears to be invalid!";
           break;
         case "wrong-password":
-          errormsg = "Your password is wrong.";
+          errormsg = "Wrong password!";
           break;
         case "user-not-found":
-          errormsg = "User with this email doesn't exist.";
+          errormsg = "User with this email doesn't exist!";
           break;
         case "user-disabled":
-          errormsg = "User with this email has been disabled.";
+          errormsg = "User with this email has been disabled!";
           break;
         case "too-many-requests":
-          errormsg = "Too many requests";
+          errormsg = "Too many requests!";
           break;
         case "operation-not-allowed":
-          errormsg = "Signing in with Email and Password is not enabled.";
+          errormsg = "Signing in with Email and Password is not enabled!";
           break;
         default:
-          errormsg = "An undefined Error happened.";
+          errormsg = "An undefined Error happened!";
       }
       Fluttertoast.showToast(msg: errormsg);
       print(error.code);
@@ -464,12 +463,12 @@ postDetailsToFirestore() async {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = _auth.currentUser;
 
-  User1 userModel =
-      User1(myController.text, true, myController2.text, myController3.text);
+  User1 userModel = User1(myController.text, user!.uid, true,
+      myController2.text, myController3.text);
 
   await firebaseFirestore
       .collection("users")
-      .doc(user!.uid)
+      .doc(user.uid)
       .set(userModel.toMap());
   Fluttertoast.showToast(msg: "Account created successfully :) ");
 }

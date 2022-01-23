@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/imports.dart';
 import 'package:loginsignup/layout/navigator.dart';
@@ -47,7 +48,10 @@ class ClubRequests extends StatelessWidget {
                               .doc(doc['clubId'])
                               .update({"status": 1});
 
-                          FirebaseFirestore.instance.collection("clubs").add({
+                          FirebaseFirestore.instance
+                              .collection("clubs")
+                              .doc(doc['clubId'])
+                              .set({
                             "clubId": doc['clubId'],
                             "name": doc['name'],
                             "description": doc['description'],
@@ -117,7 +121,9 @@ class ClubRequests extends StatelessWidget {
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Text("No Club Requests for now.");
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
             return Column(
               children: [
