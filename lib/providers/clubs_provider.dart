@@ -105,6 +105,11 @@ class ClubsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeRequests(String clubId) {
+    FireStoreServicesx.removeRequestClub(clubId);
+    notifyListeners();
+  }
+
   saveClub(var logopath, String? clubId) {
     print(clubId);
     print(_name);
