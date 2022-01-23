@@ -84,10 +84,10 @@ class Drawerwidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: ListTile(
               onTap: () {
-                MyNavigator.goprofile(context);
+                MyNavigator.goallclubs(context);
               },
               title: Text(
-                'Profile',
+                'View clubs',
                 style: TextStyle(
                     fontSize: 24, color: Color.fromRGBO(254, 3, 3, 1.0)),
               ),
