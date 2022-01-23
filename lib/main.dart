@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/others/signup.dart';
 import 'package:loginsignup/providers/clubs_provider.dart';
+import 'package:loginsignup/screens/all_clubs.dart';
 import 'package:loginsignup/screens/club_requests.dart';
 import 'package:loginsignup/screens/feed.dart';
 import 'package:loginsignup/screens/gallery.dart';
@@ -29,7 +30,8 @@ var routes = <String, WidgetBuilder>{
   "/feed": (BuildContext context) => Feed(),
   "/gallery": (BuildContext context) => Gallery(),
   "/request_club": (BuildContext context) => requestClub(),
-  "/profile": (BuildContext context) => ClubProfile(),
+  "/all_clubs": (BuildContext context) => AllClubs(),
+  "/profile": (BuildContext context) => ClubProfile(index: null,),
   "/timeline": (BuildContext context) => Timeline(),
   "/location_view": (BuildContext context) => locationview(),
   "/club_requests": (BuildContext context) => ClubRequests(),
