@@ -7,13 +7,16 @@ import 'package:loginsignup/layout/navigator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:loginsignup/models/club.dart';
 import 'package:loginsignup/providers/clubs_provider.dart';
 import 'package:loginsignup/services/fire_store_services.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class addClub extends StatefulWidget {
-  const addClub({Key? key}) : super(key: key);
+  final Club? club;
+
+  addClub([this.club]);
 
   @override
   State<StatefulWidget> createState() {
@@ -33,12 +36,41 @@ class addClubState extends State<addClub> {
   final myController6 = TextEditingController();
 
   File? _image;
+  late String img;
+  String txt = "";
   final picker = ImagePicker();
   @override
   void dispose() {
     myController.dispose();
     myController2.dispose();
     super.dispose();
+  }
+
+  void initState() {
+    if (widget.club == null) {
+      //New Record
+      myController.text = "";
+      myController2.text = "";
+      myController3.text = "";
+      myController4.text = "";
+      myController5.text = "";
+      myController6.text = "";
+    } else {
+      //Controller Update
+      myController.text = widget.club!.name;
+      myController2.text = widget.club!.owner!;
+      myController3.text = widget.club!.president!;
+      myController4.text = widget.club!.description!;
+      myController5.text = widget.club!.mission!;
+      myController6.text = widget.club!.vision!;
+      img = widget.club!.logopath;
+      _image = File(img);
+      print("image is");
+      print(_image);
+      print(widget.club!.clubId!);
+    }
+
+    super.initState();
   }
 
   Future<void> _showChoiceDialog(BuildContext context) {
@@ -123,25 +155,6 @@ class addClubState extends State<addClub> {
               children: <Widget>[
                 Column(
                   children: [
-                    // Padding(
-                    //   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: <Widget>[
-                    //       IconButton(
-                    //           padding: EdgeInsets.zero,
-                    //           icon: Icon(
-                    //             Icons.arrow_back_ios,
-                    //             size: 30,
-                    //           ),
-                    //           color: Colors.red,
-                    //           onPressed: () {
-                    //             MyNavigator.goToAdminHomepage(context);
-                    //           }),
-                    //       Container(height: 10, width: 24)
-                    //     ],
-                    //   ),
-                    // ),
                     Container(height: 10, width: 24),
                     Text(
                       'Create A Club',
@@ -158,19 +171,22 @@ class addClubState extends State<addClub> {
                         CircleAvatar(
                           radius: 70,
                           child: ClipOval(
-                            child: _image == null
-                                ? Image.asset(
-                                    'assets/images/default.png',
-                                    height: 150,
-                                    width: 150,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.file(
-                                    File(_image!.path),
-                                    height: 150,
-                                    width: 150,
-                                    fit: BoxFit.cover,
-                                  ),
+                            child: widget.club != null
+                                ? Image.network(img,
+                                    height: 150, width: 150, fit: BoxFit.fill)
+                                : _image == null
+                                    ? Image.asset(
+                                        'assets/images/default.png',
+                                        height: 150,
+                                        width: 150,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.file(
+                                        File(_image!.path),
+                                        height: 150,
+                                        width: 150,
+                                        fit: BoxFit.cover,
+                                      ),
                           ),
                         ),
                         Container(
@@ -195,8 +211,16 @@ class addClubState extends State<addClub> {
                     ),
                   ),
                 ),
+                Text(
+                  txt,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
                 Padding(
-                    padding: const EdgeInsets.all(0),
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Form(
                       key: _formKey,
                       child: Container(
@@ -443,13 +467,19 @@ class addClubState extends State<addClub> {
                                       ))),
                                   child: Text('Create'),
                                   onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
+                                    if (_image == null) {
+                                      setState(
+                                          () => txt = 'please input a photo');
+                                    }
+                                    if (_formKey.currentState!.validate() &&
+                                        _image != null) {
                                       var url =
                                           await uploadImageToFirebase(context);
                                       //var url = 'test.png';
+                                      var clubid = widget.club?.clubId;
                                       Provider.of<ClubsProvider>(context,
                                               listen: false)
-                                          .saveClub(url);
+                                          .saveClub(url, clubid);
 
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -475,7 +505,7 @@ class addClubState extends State<addClub> {
   }
 
   void _openGallery(BuildContext context) async {
-    final pickedFile = await picker.getImage(
+    final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
     );
     setState(() {
@@ -486,7 +516,7 @@ class addClubState extends State<addClub> {
   }
 
   void _openCamera(BuildContext context) async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
     setState(() {
       _image = File(pickedFile!.path);
     });

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/navigator.dart';
+import 'package:loginsignup/others/signin_old.dart';
+import 'package:loginsignup/screens/signin.dart';
+import 'package:loginsignup/services/authentication_service.dart';
+import 'package:provider/src/provider.dart';
 
 /*class Layout extends StatelessWidget {
   @override
@@ -32,12 +36,6 @@ class Footerwidget extends StatelessWidget {
   }
 }
 
-class Nemo {
-  static const String pageF = '/feed';
-  static const String pageP = '/profile';
-  static const String pageG = '/gallery';
-}
-
 class Drawerwidget extends StatelessWidget {
   final _navigatorKey = GlobalKey<NavigatorState>();
   String? _currentPage;
@@ -48,7 +46,7 @@ class Drawerwidget extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 10),
             child: DrawerHeader(
                 child: Text(
               'MIU Clubs',
@@ -56,7 +54,7 @@ class Drawerwidget extends StatelessWidget {
             )),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 2),
             child: ListTile(
               onTap: () {
                 Navigator.of(context).pop();
@@ -70,7 +68,7 @@ class Drawerwidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 10),
             child: ListTile(
               onTap: () {
                 MyNavigator.goTimeline(context);
@@ -83,7 +81,7 @@ class Drawerwidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 10),
             child: ListTile(
               onTap: () {
                 MyNavigator.goprofile(context);
@@ -96,8 +94,11 @@ class Drawerwidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 10),
             child: ListTile(
+              onTap: () {
+                MyNavigator.gogallery(context);
+              },
               title: Text(
                 'Gallery',
                 style: TextStyle(
@@ -106,7 +107,20 @@ class Drawerwidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 10),
+            child: ListTile(
+              onTap: () {
+                MyNavigator.gorequest(context);
+              },
+              title: Text(
+                'Request Club',
+                style: TextStyle(
+                    fontSize: 24, color: Color.fromRGBO(254, 3, 3, 1.0)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
             child: ListTile(
               onTap: () {
                 MyNavigator.goloc(context);
@@ -137,7 +151,15 @@ class Appbarwidget extends StatelessWidget with PreferredSizeWidget {
             style: ElevatedButton.styleFrom(
                 primary: Color.fromRGBO(51, 51, 51, 1.0),
                 onPrimary: Color.fromRGBO(254, 3, 3, 1.0)),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              context.read<AuthenticationService>().signOut();
+              Navigator.pushAndRemoveUntil<void>(
+                context,
+                MaterialPageRoute<void>(
+                    builder: (BuildContext context) => Signin()),
+                ModalRoute.withName('/login'),
+              );
+            },
             child: Icon(Icons.logout))
       ],
       bottom: PreferredSize(
