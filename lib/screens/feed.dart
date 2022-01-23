@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,7 +9,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path/path.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 
 CollectionReference PostsColl = FirebaseFirestore.instance.collection('Posts');
 Stream<QuerySnapshot<Object?>> firestore = PostsColl.snapshots();
@@ -22,6 +24,22 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
+  final FirebaseMessaging _firebasemessaging = FirebaseMessaging.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getInitialMessage();
+    Future<void> firebaseMessagingBackgroundHandler(
+        RemoteMessage message) async {
+      print("Handling a background message");
+    }
+
+    FirebaseMessaging.onMessage.listen(firebaseMessagingBackgroundHandler);
+
+    _firebasemessaging.requestPermission(sound: true, badge: true, alert: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     log('mel build ${posts.length}');
@@ -52,7 +70,6 @@ class _FeedState extends State<Feed> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    FeedHeader(),
                     Column(
                       children: posts,
                     )
@@ -76,7 +93,7 @@ class _FeedHeaderState extends State<FeedHeader> {
   File? _image;
   final picker = ImagePicker();
 
-  Future uploadImageToFirebase(BuildContext context) async {
+  /*Future uploadImageToFirebase(BuildContext context) async {
     log('function');
     String fileName = basename(_image!.path);
     log('basename ${fileName}');
@@ -95,7 +112,7 @@ class _FeedHeaderState extends State<FeedHeader> {
     //});
     log(url.toString());
     return url;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -124,14 +141,15 @@ class _FeedHeaderState extends State<FeedHeader> {
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                   onPressed: () async {
-                    String url = await uploadImageToFirebase(context);
+                    /*String url = await uploadImageToFirebase(context);
                     log('3ada');
                     log(url.toString());
                     PostsColl.add({
                       'title': 'yarab',
                       'image': url,
                       'description': 'yeshtaghal',
-                    });
+                    })*/
+                    ;
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Club Added')),
@@ -146,12 +164,12 @@ class _FeedHeaderState extends State<FeedHeader> {
   }
 
   File? PIF;
-  Future<String> postpost(Context) async {
+  /*Future<String> postpost(Context) async {
     var context = Context;
 
     final Ipicker = ImagePicker();
     log('3ada 3');
-    uploadImageToFirebase(Future<String> pif) {
+    /*uploadImageToFirebase(Future<String> pif) {
       log('awel eltanya');
       log(PIF.toString());
       log('magatsh');
@@ -167,7 +185,7 @@ class _FeedHeaderState extends State<FeedHeader> {
       url = ref.getDownloadURL();
       log('up 5');
       return url;
-    }
+    }*/
 
     Future<String> pickimage() async {
       final picked = await Ipicker.getImage(source: ImageSource.camera);
@@ -183,7 +201,7 @@ class _FeedHeaderState extends State<FeedHeader> {
 
     log(pickimage().toString());
     log('ba3d pick image');
-    String url = await uploadImageToFirebase(pickimage());
+    //String url = await uploadImageToFirebase(pickimage());
     log('the url is ${url}');
 
     Post NewPost = new Post('Added post', url, 'description');
@@ -196,7 +214,7 @@ class _FeedHeaderState extends State<FeedHeader> {
     return url;
     log(NewPost.title.toString());
     log(posts.length.toString());
-  }
+  }*/
 
   void _openCamera(BuildContext context) async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
