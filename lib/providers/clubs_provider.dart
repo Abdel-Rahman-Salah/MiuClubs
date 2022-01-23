@@ -14,6 +14,7 @@ class ClubsProvider extends ChangeNotifier {
   String? _mission;
   String? _vision;
   String? _description;
+  int? _status;
   var uuid = Uuid();
 
 //Getters
@@ -25,6 +26,7 @@ class ClubsProvider extends ChangeNotifier {
   String? get vision => _vision;
   String? get mission => _mission;
   String? get president => _president;
+  int? get status => _status;
 //Setters
   changeName(String value) {
     _name = value;
@@ -54,6 +56,14 @@ class ClubsProvider extends ChangeNotifier {
   changeVision(String value) {
     _vision = value;
     notifyListeners();
+  }
+
+  acceptClub() {
+    _status = 1;
+  }
+
+  rejectClub() {
+    _status = 2;
   }
 
   loadValues(Club club) {
@@ -90,25 +100,37 @@ class ClubsProvider extends ChangeNotifier {
   }
 
   // function to remove or delete clubs by using list index position
-  void removeClubs(int index) {
-    _clubs.removeAt(index);
+  void removeClubs(String clubId) {
+    FireStoreServicesx.removeClub(clubId);
     notifyListeners();
   }
 
-  saveClub(var logopath) {
-    print(_clubId);
+  void removeRequests(String clubId) {
+    FireStoreServicesx.removeRequestClub(clubId);
+    notifyListeners();
+  }
+
+  saveClub(var logopath, String? clubId) {
+    print(clubId);
     print(_name);
-    if (_clubId == null) {
+    if (clubId == null) {
       var newClub = Club(name!, uuid.v4(), logopath!, owner!, president!,
           description!, mission!, vision!);
       FireStoreServicesx.saveClub(newClub);
       notifyListeners();
     } else {
       //Update
-      var updatedClub = Club(name!, clubId!, logopath!, owner!, president!,
+      var updatedClub = Club(name!, clubId, logopath!, owner!, president!,
           description!, mission!, vision!);
       FireStoreServicesx.saveClub(updatedClub);
       notifyListeners();
     }
+  }
+
+  requestClub(var logopath) {
+    var newClub = Club.request(name!, uuid.v4(), logopath!, owner!, president!,
+        description!, mission!, vision!, 0);
+    FireStoreServicesx.requestClub(newClub);
+    notifyListeners();
   }
 }

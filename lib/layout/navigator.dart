@@ -12,10 +12,6 @@ class MyNavigator {
     Navigator.pushNamed(context, "/loginadmin");
   }
 
-  static void goToAdminHomepage(BuildContext context) {
-    Navigator.pushNamed(context, "/admin");
-  }
-
   static void goToAddClub(BuildContext context) {
     Navigator.pushNamed(context, "/create");
   }
@@ -26,6 +22,10 @@ class MyNavigator {
 
   static void gofeed(BuildContext context) {
     Navigator.pushReplacementNamed(context, "/feed");
+  }
+
+  static void goadmin(BuildContext context) {
+    Navigator.pushNamed(context, "/admin");
   }
 
   static void goprofile(BuildContext context) {
@@ -48,8 +48,17 @@ class MyNavigator {
     Navigator.pushNamed(context, "/location_view");
   }
 
-  static void goclubrequest(BuildContext context) {
+  static void gorequest(BuildContext context) {
     Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/request_club");
+  }
+
+  static void gogallery(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/gallery");
+  }
+
+  static void goclubrequest(BuildContext context) {
     Navigator.pushNamed(context, "/club_requests");
   }
 

@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/constant.dart';
 import 'package:loginsignup/layout/navigator.dart';
-import 'package:loginsignup/screens/signin_admin.dart';
 import 'package:loginsignup/screens/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,19 +16,17 @@ class Signin extends StatefulWidget {
 }
 
 final _formKey = GlobalKey<FormState>();
-final myController = TextEditingController();
-final myController2 = TextEditingController();
+final myController5 = TextEditingController();
+final myController6 = TextEditingController();
 final _auth = FirebaseAuth.instance;
 late String errormsg;
+void clear() {
+  myController5.clear();
+  myController6.clear();
+}
 
 class _SigninState extends State<Signin> {
   @override
-  void dispose() {
-    myController.dispose();
-    myController2.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,12 +50,12 @@ class _SigninState extends State<Signin> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.09),
-                    child: Image.asset("assets/images/login.jpg"),
+                    child: Image.asset("assets/images/login1.jpg"),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                     child: Text(
-                      "Username",
+                      "Email",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
@@ -66,18 +63,23 @@ class _SigninState extends State<Signin> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                     child: TextFormField(
-                      controller: myController,
+                      controller: myController5,
                       autofocus: false,
                       validator: (value) {
-                        if (value == null || value.isEmpty)
-                          return 'Please enter username';
+                        if (value!.isEmpty) {
+                          return ("Please enter your email");
+                        }
+                        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                            .hasMatch(value)) {
+                          return ("Enter a valid email");
+                        }
                         return null;
                       },
                       style: new TextStyle(fontSize: 12.0),
                       decoration: new InputDecoration(
                           fillColor: Colors.black26,
                           filled: true,
-                          hintText: 'Enter Username',
+                          hintText: 'Enter Email',
                           contentPadding: const EdgeInsets.only(
                               left: 14.0, bottom: 8.0, top: 10.0),
                           focusedBorder: OutlineInputBorder(
@@ -103,7 +105,7 @@ class _SigninState extends State<Signin> {
                     padding: const EdgeInsets.fromLTRB(20, 25, 20, 4),
                     child: TextFormField(
                       obscureText: true,
-                      controller: myController2,
+                      controller: myController6,
                       autofocus: false,
                       validator: (value) {
                         RegExp regExp = RegExp(r'^.{8,}$');
@@ -128,34 +130,17 @@ class _SigninState extends State<Signin> {
                           )),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CheckerBox(),
-                      Container(
-                        margin: EdgeInsets.only(right: 20),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                                color: red.withOpacity(0.75),
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 40,
                   ),
                   InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                        MyNavigator.gofeed(context);
+                        // ScaffoldMessenger.of(context).showSnackBar(
+                        //   const SnackBar(content: Text('Processing Data')),
+                        // );
+                        signIn(context);
                       }
-                      print(myController.text);
-                      print(myController2.text);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -198,24 +183,6 @@ class _SigninState extends State<Signin> {
                                     print("Sign Up click");
                                   }),
                           ]),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.149,
-                    ),
-                    child: Text.rich(
-                      TextSpan(
-                          text: "Sign in As Admin",
-                          style: TextStyle(color: red, fontSize: 16),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SigninAdmin()));
-                              print("Sign Up click");
-                            }),
                     ),
                   ),
                 ],
@@ -263,42 +230,51 @@ class _CheckerBoxState extends State<CheckerBox> {
                   print(isCheck);
                 });
               }),
-          Text.rich(
-            TextSpan(
-              text: "Remember me",
-              style: TextStyle(color: grayshade.withOpacity(0.8), fontSize: 16),
-            ),
-          ),
         ],
       ),
     );
   }
 }
 
-void signIn(String email, String password) async {
+void signIn(BuildContext context) async {
   if (_formKey.currentState!.validate()) {
     try {
       await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
+          .signInWithEmailAndPassword(
+              email: myController5.text.trim(),
+              password: myController6.text.trim())
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
+                if (myController5.text == 'admin@gmail.com')
+                  {
+                    clear(),
+                    Navigator.pushReplacementNamed(context, '/admin'),
+                  }
+                else
+                  {
+                    clear(),
+                    Navigator.pushReplacementNamed(context, '/feed'),
+                  }
               });
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
         case "invalid-email":
-          errormsg = "Wrong email address.";
+          errormsg = "Your email address appears to be invalid!";
           break;
         case "wrong-password":
-          errormsg = "Wrong password.";
+          errormsg = "Wrong password!";
           break;
         case "user-not-found":
-          errormsg = "User with this email doesn't exist.";
+          errormsg = "User with this email doesn't exist!";
+          break;
+        case "too-many-requests":
+          errormsg = "Too many requests!";
           break;
         case "operation-not-allowed":
-          errormsg = "Signing in with Email and Password is not enabled.";
+          errormsg = "Signing in with Email and Password is not enabled!";
           break;
         default:
-          errormsg = "An undefined Error happened.";
+          errormsg = "An undefined Error happened!";
       }
       Fluttertoast.showToast(msg: errormsg);
       print(error.code);

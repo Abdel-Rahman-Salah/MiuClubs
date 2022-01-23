@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loginsignup/screens/timeline.dart';
+import '../models/user.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -14,23 +15,17 @@ class SignUp extends StatefulWidget {
   @override
   State<SignUp> createState() => _SignUpState();
 }
-  bool _isHidden = true;
-  final _formKey = GlobalKey<FormState>();
-  final myController = TextEditingController();
-  final myController2 = TextEditingController();
-  final myController3 = TextEditingController();
-  final _auth = FirebaseAuth.instance;
-  late String errorMessage;
+
+bool _isHidden = true;
+final _formKey1 = GlobalKey<FormState>();
+final myController = TextEditingController();
+final myController2 = TextEditingController();
+final myController3 = TextEditingController();
+final _auth = FirebaseAuth.instance;
+late String errorMessage;
+
 class _SignUpState extends State<SignUp> {
-
   @override
-  void dispose() {
-    myController.dispose();
-    myController2.dispose();
-    myController3.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +40,7 @@ class _SignUpState extends State<SignUp> {
                     topLeft: Radius.circular(45),
                     topRight: Radius.circular(45))),
             child: Form(
-              key: _formKey,
+              key: _formKey1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -55,7 +50,7 @@ class _SignUpState extends State<SignUp> {
                       width: MediaQuery.of(context).size.width * 0.8,
                       margin: EdgeInsets.only(
                           left: MediaQuery.of(context).size.width * 0.09),
-                      child: Image.asset("assets/images/login.jpg"),
+                      child: Image.asset("assets/images/login1.jpg"),
                     ),
                   ),
                   Padding(
@@ -154,9 +149,9 @@ class _SignUpState extends State<SignUp> {
                       validator: (value) {
                         RegExp regExp = RegExp(r'^.{8,}$');
                         if (value == null || value.isEmpty)
-                          return 'Please enter Password';
+                          return 'Please enter a Password';
                         if (!regExp.hasMatch(value)) {
-                          return ("Enter valid password min 8 characters ");
+                          return ("Please enter a valid password with a minimum of 8 characters ");
                         }
                         return null;
                       },
@@ -188,8 +183,8 @@ class _SignUpState extends State<SignUp> {
                   const CheckerBox(),
                   InkWell(
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        MyNavigator.GoLogin(context);
+                      if (_formKey1.currentState!.validate()) {
+                        signUp(context);
                       }
                       print(myController.text);
                       print(myController2.text);
@@ -228,10 +223,7 @@ class _SignUpState extends State<SignUp> {
                                 style: TextStyle(color: red, fontSize: 16),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Signin()));
+                                    Navigator.pushNamed(context, "/login");
                                     print("Sign in click");
                                   }),
                           ]),
@@ -309,7 +301,6 @@ class _CheckerBoxState extends State<CheckerBox> {
   }
 }
 
-// ignore: must_be_immutable
 class InputField extends StatelessWidget {
   String headerText;
   String hintTexti;
@@ -423,63 +414,61 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
   }
 }
 
-void signUp(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postDetailsToFirestore()})
-            .catchError((e) {
-          Fluttertoast.showToast(msg: e.message);
-        });
-      } on FirebaseAuthException catch (error) {
-        switch (error.code) {
-          case "invalid-email":
-            errormsg = "Your email address appears to be malformed.";
-            break;
-          case "wrong-password":
-            errormsg = "Your password is wrong.";
-            break;
-          case "user-not-found":
-            errormsg = "User with this email doesn't exist.";
-            break;
-          case "user-disabled":
-            errormsg = "User with this email has been disabled.";
-            break;
-          case "too-many-requests":
-            errormsg = "Too many requests";
-            break;
-          case "operation-not-allowed":
-            errormsg = "Signing in with Email and Password is not enabled.";
-            break;
-          default:
-            errormsg = "An undefined Error happened.";
-        }
-        Fluttertoast.showToast(msg: errormsg);
-        print(error.code);
+void signUp(BuildContext context) async {
+  if (_formKey1.currentState!.validate()) {
+    try {
+      await _auth
+          .createUserWithEmailAndPassword(
+              email: myController2.text.trim(),
+              password: myController3.text.trim())
+          .then((value) => {
+                postDetailsToFirestore(),
+                MyNavigator.GoLogin(context),
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e.message);
+      });
+    } on FirebaseAuthException catch (error) {
+      switch (error.code) {
+        case "invalid-email":
+          errormsg = "Your email address appears to be invalid!";
+          break;
+        case "wrong-password":
+          errormsg = "Wrong password!";
+          break;
+        case "user-not-found":
+          errormsg = "User with this email doesn't exist!";
+          break;
+        case "user-disabled":
+          errormsg = "User with this email has been disabled!";
+          break;
+        case "too-many-requests":
+          errormsg = "Too many requests!";
+          break;
+        case "operation-not-allowed":
+          errormsg = "Signing in with Email and Password is not enabled!";
+          break;
+        default:
+          errormsg = "An undefined Error happened!";
       }
+      Fluttertoast.showToast(msg: errormsg);
+      print(error.code);
     }
   }
+}
 
-  postDetailsToFirestore() async {
-    // calling firestore and user model, sending values
+postDetailsToFirestore() async {
+  // calling firestore and user model, sending values
 
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  User? user = _auth.currentUser;
 
-    User userModel = User();
+  User1 userModel = User1(myController.text, user!.uid, true,
+      myController2.text, myController3.text);
 
-    // writing values
-    userModel.name = myController.text;
-    userModel.email = myController2.text;
-    userModel.password = myController3.text;
-
-    await firebaseFirestore
-        .collection("users")
-        .doc(user.uid)
-        .set(userModel.toMap(userModel));
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
-
-    
-  }
+  await firebaseFirestore
+      .collection("users")
+      .doc(user.uid)
+      .set(userModel.toMap());
+  Fluttertoast.showToast(msg: "Account created successfully :) ");
 }

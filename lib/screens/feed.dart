@@ -122,9 +122,12 @@ class _FeedHeaderState extends State<FeedHeader> {
     log('ref');
     UploadTask uploadTask = ref.putFile(_image!);
     log('ptfile ${uploadTask}');
-    var url;
     //uploadTask.whenComplete(() {
-    url = await ref.getDownloadURL();
+    var downloadURL =
+        (await (await uploadTask.whenComplete(() => ref.getDownloadURL()))
+                .ref
+                .getDownloadURL())
+            .toString();
     log('down');
     //}).catchError((onError) {
     //print(onError);
@@ -152,7 +155,7 @@ class _FeedHeaderState extends State<FeedHeader> {
               child: ListTile(
                   onTap: () {
                     _openCamera(context);
-                    log(_image!.path.toString());
+                    //log(_image!.path.toString());
                   },
                   title: Text('Post')),
             ),
