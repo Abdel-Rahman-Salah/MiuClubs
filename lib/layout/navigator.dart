@@ -28,6 +28,11 @@ class MyNavigator {
     Navigator.pushNamed(context, "/admin");
   }
 
+   static void goallclubs(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.pushNamed(context, "/all_clubs");
+  }
+
   static void goprofile(BuildContext context) {
     Navigator.of(context).pop();
     Navigator.pushNamed(context, "/profile");
