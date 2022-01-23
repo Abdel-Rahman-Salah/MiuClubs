@@ -1,13 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loginsignup/others/signup.dart';
 import 'package:loginsignup/providers/clubs_provider.dart';
 import 'package:loginsignup/screens/club_requests.dart';
 import 'package:loginsignup/screens/feed.dart';
+import 'package:loginsignup/screens/gallery.dart';
 import 'package:loginsignup/screens/location_view.dart';
 import 'package:loginsignup/screens/manage_clubs.dart';
 import 'package:loginsignup/screens/profile.dart';
+import 'package:loginsignup/screens/request_club.dart';
 import 'package:loginsignup/screens/signin.dart';
-import 'package:loginsignup/screens/signin_admin.dart';
 import 'package:loginsignup/screens/splash_screen.dart';
 import 'package:loginsignup/screens/timeline.dart';
 import 'package:loginsignup/services/authentication_service.dart';
@@ -20,11 +22,13 @@ import 'package:firebase_core/firebase_core.dart';
 
 var routes = <String, WidgetBuilder>{
   "/login": (BuildContext context) => Signin(),
+  "/signup": (BuildContext context) => SignUp(),
   "/admin": (BuildContext context) => AdminHomePage(),
   "/create": (BuildContext context) => addClub(),
   "/manage": (BuildContext context) => ManageClubs(),
   "/feed": (BuildContext context) => Feed(),
-  "/adminlogin": (BuildContext context) => SigninAdmin(),
+  "/gallery": (BuildContext context) => Gallery(),
+  "/request_club": (BuildContext context) => requestClub(),
   "/profile": (BuildContext context) => ClubProfile(),
   "/timeline": (BuildContext context) => Timeline(),
   "/location_view": (BuildContext context) => locationview(),
@@ -33,6 +37,7 @@ var routes = <String, WidgetBuilder>{
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  imageCache?.clear();
   runApp(myapp());
 }
 
@@ -42,6 +47,7 @@ class myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firestoreService = FireStoreServicesx();
+    final firebaseUser = context.watch<User?>();
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
@@ -67,7 +73,7 @@ class myapp extends StatelessWidget {
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               } else if (snapshot.hasData) {
-                return AdminHomePage();
+                return SplashScreen();
               } else {
                 return SplashScreen();
               }

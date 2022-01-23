@@ -9,27 +9,10 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class AdminHomePageState extends State<AdminHomePage> {
-  int currentPos = 0;
-  List<String> listPaths = [
-    "assets/images/default.png",
-    "assets/images/login.jpg",
-    "assets/images/owner.png",
-    "assets/images/president.png",
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-            centerTitle: true,
-            title: const Text(
-              'Dashboard',
-              style: TextStyle(color: Colors.red),
-            ),
-            backgroundColor: Colors.black,
-          ),
-        ),
+        appBar: Appbarwidget('Dashboard'),
         drawer: Drawerwidget(),
         body: Column(
           children: [

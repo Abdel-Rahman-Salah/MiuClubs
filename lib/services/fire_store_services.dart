@@ -33,6 +33,15 @@ class FireStoreServicesx {
             .toList());
   }
 
+  Stream<List<Club>> getClubRequests() {
+    return FirebaseFirestore.instance
+        .collection('club_requests')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((document) => Club.RequestsfromFirestore(document.data()))
+            .toList());
+  }
+
   Stream get allClubs =>
       FirebaseFirestore.instance.collection("clubs").snapshots();
 
@@ -41,5 +50,23 @@ class FireStoreServicesx {
         .collection('clubs')
         .doc(club.clubId)
         .set(club.toMap());
+  }
+
+  static requestClub(Club club) async {
+    return FirebaseFirestore.instance
+        .collection('club_requests')
+        .doc(club.clubId)
+        .set(club.reqtoMap());
+  }
+
+  static removeClub(String clubId) async {
+    return FirebaseFirestore.instance.collection('clubs').doc(clubId).delete();
+  }
+
+  static removeRequestClub(String clubId) async {
+    return FirebaseFirestore.instance
+        .collection('club_requests')
+        .doc(clubId)
+        .delete();
   }
 }

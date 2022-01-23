@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/imports.dart';
 import 'package:loginsignup/layout/navigator.dart';
 import 'package:loginsignup/providers/clubs_provider.dart';
+import 'package:loginsignup/screens/add_club.dart';
 import 'package:loginsignup/screens/manage_Clubs.dart';
 import 'package:provider/provider.dart';
 import '../models/club.dart';
@@ -13,7 +14,6 @@ class ClubRequests extends StatelessWidget {
   Widget build(BuildContext context) {
     final clubs = Provider.of<List<Club>>(context);
     return Scaffold(
-      drawer: Drawerwidget(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.0),
         child: AppBar(
@@ -23,6 +23,10 @@ class ClubRequests extends StatelessWidget {
             style: TextStyle(color: Colors.red),
           ),
           backgroundColor: Colors.black,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
       ),
       body: Column(
@@ -38,70 +42,74 @@ class ClubRequests extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: (clubs != null)
-                  ? ListView.builder(
-                      itemCount: Provider.of<List<Club>>(context).length,
-                      itemBuilder: (context, index) {
-                        {
-                          String path = clubs[index].logopath;
-                          print(path);
-                          return Container(
-                            color: Colors.grey[200],
-                            // width:MediaQuery.of(context).size.width,
-                            // height:MediaQuery.of(context).size.height,
-                            child: ListTile(
-                              leading: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  minWidth: 44,
-                                  minHeight: 44,
-                                  maxWidth: 64,
-                                  maxHeight: 64,
-                                ),
-                                // child: Image.asset(
-                                //   'assets/images/$path',
-                                //   fit: BoxFit.cover,
-                                // ),
-                                child: Image.network(path),
+            child: (clubs != null)
+                ? ListView.builder(
+                    itemCount: Provider.of<List<Club>>(context).length,
+                    itemBuilder: (context, index) {
+                      {
+                        String path = clubs[index].logopath;
+                        print(path);
+                        return Container(
+                          color: Colors.grey[200],
+                          // width:MediaQuery.of(context).size.width,
+                          // height:MediaQuery.of(context).size.height,
+                          child: ListTile(
+                            leading: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 44,
+                                minHeight: 44,
+                                maxWidth: 64,
+                                maxHeight: 64,
                               ),
-                              trailing: Wrap(
-                                spacing: 20,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        MyNavigator.goToAddClub(context);
-                                      },
-                                      icon: Icon(
-                                        Icons.check,
-                                        color: Colors.green[700],
-                                      )),
-                                  OutlinedButton(
-                                      onPressed: () {
-                                        Provider.of<ClubsProvider>(context,
-                                                listen: false)
-                                            .removeClubs(index);
-                                      },
-                                      child: Icon(
-                                        Icons.clear,
-                                        color: Colors.grey[700],
-                                      )),
-                                ],
-                              ),
-                              title: Text(
-                                clubs[index].name,
-                                style: TextStyle(
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red),
-                              ),
+                              // child: Image.asset(
+                              //   'assets/images/$path',
+                              //   fit: BoxFit.cover,
+                              // ),
+                              child: Image.network(path),
                             ),
-                            margin: EdgeInsets.all(5),
-                            padding: EdgeInsets.all(5),
-                            //color: Colors.grey,
-                          );
-                        }
-                      },
-                    )
-                  : Center(child: CircularProgressIndicator())),
+                            trailing: Wrap(
+                              spacing: 20,
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  addClub(clubs[index])));
+                                    },
+                                    icon: Icon(
+                                      Icons.check,
+                                      color: Colors.green[700],
+                                    )),
+                                OutlinedButton(
+                                    onPressed: () {
+                                      Provider.of<ClubsProvider>(context,
+                                              listen: false)
+                                          .rejectClub();
+                                    },
+                                    child: Icon(
+                                      Icons.clear,
+                                      color: Colors.grey[700],
+                                    )),
+                              ],
+                            ),
+                            title: Text(
+                              clubs[index].name,
+                              style: TextStyle(
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red),
+                            ),
+                          ),
+                          margin: EdgeInsets.all(5),
+                          padding: EdgeInsets.all(5),
+                          //color: Colors.grey,
+                        );
+                      }
+                    },
+                  )
+                : Center(child: Text("No requests for now.")),
+          )
         ],
       ),
     );
