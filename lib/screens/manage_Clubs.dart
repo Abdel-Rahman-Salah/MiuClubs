@@ -17,7 +17,7 @@ import 'add_club.dart';
 //       child: MaterialApp(title: 'Provider Demo', home: ManageClubs()),
 //     );
 //   }
-// }
+// }}}
 
 class ManageClubs extends StatelessWidget {
   @override
