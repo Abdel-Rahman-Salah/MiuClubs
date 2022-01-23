@@ -114,14 +114,11 @@ class ManageClubs extends StatelessWidget {
                       }
                     },
                   )
-                : Center(child: Text("No requests for now.")),
+                : Center(child: Text("No clubs to show")),
           ),
           IconButton(
             onPressed: () {
-              //MyNavigator.goToAddClub(context);
-              context.read<ClubsProvider>().addClubs("mun", 'mun.png');
-              //context.read<ClubsProvider>().addClubs("Hello", "Bye");
-              //MyNavigator.goToAddClub(context);
+              MyNavigator.goToAddClub(context);
             },
             icon: Icon(Icons.add_circle_rounded),
             color: Colors.red[700],
