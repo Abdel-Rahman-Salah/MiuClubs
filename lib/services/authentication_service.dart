@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginsignup/models/user.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -44,5 +46,12 @@ class AuthenticationService {
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
+  }
+
+  static Stream<List<User1>> usetype() {
+    return FirebaseFirestore.instance.collection('users').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((document) => User1.fromFirestore(document.data()))
+            .toList());
   }
 }

@@ -463,12 +463,12 @@ postDetailsToFirestore() async {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = _auth.currentUser;
 
-  User1 userModel =
-      User1(myController.text, true, myController2.text, myController3.text);
+  User1 userModel = User1(myController.text, user!.uid, true,
+      myController2.text, myController3.text);
 
   await firebaseFirestore
       .collection("users")
-      .doc(user!.uid)
+      .doc(user.uid)
       .set(userModel.toMap());
   Fluttertoast.showToast(msg: "Account created successfully :) ");
 }
