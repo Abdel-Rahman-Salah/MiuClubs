@@ -1,11 +1,29 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:loginsignup/layout/constant.dart';
 import 'package:loginsignup/layout/imports.dart';
+import 'package:loginsignup/models/club.dart';
+import 'package:provider/provider.dart';
 
 class ClubProfile extends StatelessWidget {
+  final index;
+   ClubProfile({Key? key,required this.index}) : super(key: key);
   @override
+   
   Widget build(BuildContext context) {
     // TODO: implement build
+    final clubs = Provider.of<List<Club>>(context);
+    
+    final club=clubs[index];
+    final name=club.name;
+    final mission=club.mission;
+    final vision =club.vision;
+    final logo = club.logopath;
+    log('Log is : $mission');
+    
     return Scaffold(
       bottomSheet: Footerwidget(),
       drawer: Drawerwidget(),
@@ -14,38 +32,35 @@ class ClubProfile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.25),
-                child: Row(
-                  children: [
+             
+               
                     Text(
-                      "Club Full Slogan",
+                      "$name",
                       style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.red),
+                        
                     ),
-                    IconButton(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.15),
-                        onPressed: () {},
-                        icon: Icon(Icons.settings))
-                  ],
-                ),
-              ),
-              Text(
-                "Board",
-                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              ),
+                    
+               
+             
+             
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: Container(child: Image.asset('assets/images/owner.png')),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0),
-                child: Container(
-                    child: Image.asset('assets/images/president.png')),
+                child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 150,
+                                minHeight: 100,
+                                maxWidth: 250,
+                                maxHeight: 200,
+                              ),
+                              // child: Image.asset(
+                              //   'assets/images/$path',
+                              //   fit: BoxFit.cover,
+                              // ),
+                              child: Image.network(logo),
+                            ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 12.5),
@@ -57,7 +72,7 @@ class ClubProfile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                  "$mission",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
@@ -72,7 +87,7 @@ class ClubProfile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  "Lorem ipsum dolor sit amet, consectetur lor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                  "$vision",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
