@@ -24,13 +24,13 @@ class MyNavigator {
     Navigator.pushReplacementNamed(context, "/feed");
   }
 
-  static void goadmin(BuildContext context) {
-    Navigator.pushNamed(context, "/admin");
+  static void goallclubs(BuildContext context) {
+    Navigator.pushNamed(context, "/all_clubs");
   }
 
-   static void goallclubs(BuildContext context) {
+  static void goaddpost(BuildContext context) {
     Navigator.of(context).pop();
-    Navigator.pushNamed(context, "/all_clubs");
+    Navigator.pushNamed(context, "/add_post");
   }
 
   static void goprofile(BuildContext context) {
@@ -41,11 +41,6 @@ class MyNavigator {
   static void goTimeline(BuildContext context) {
     Navigator.of(context).pop();
     Navigator.pushNamed(context, "/timeline");
-  }
-
-  static void goNotifications(BuildContext context) {
-    Navigator.of(context).pop();
-    Navigator.pushNamed(context, "/notifications");
   }
 
   static void goloc(BuildContext context) {

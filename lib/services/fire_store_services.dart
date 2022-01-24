@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loginsignup/models/club.dart';
+import 'package:loginsignup/models/post.dart';
 import '../models/event.dart';
 
 class FireStoreServicesx {
@@ -27,6 +28,33 @@ class FireStoreServicesx {
     return data;
   }
 
+  Stream<List<Club>> getClubRequests() {
+    return FirebaseFirestore.instance
+        .collection('club_requests')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((document) => Club.RequestsfromFirestore(document.data()))
+            .toList());
+  }
+
+  static removeRequestClub(String clubId) async {
+    return FirebaseFirestore.instance
+        .collection('club_requests')
+        .doc(clubId)
+        .delete();
+  }
+
+  static removeClub(String clubId) async {
+    return FirebaseFirestore.instance.collection('clubs').doc(clubId).delete();
+  }
+
+  static requestClub(Club club) async {
+    return FirebaseFirestore.instance
+        .collection('club_requests')
+        .doc(club.clubId)
+        .set(club.reqtoMap());
+  }
+
   Stream<List<Club>> getClub() {
     return FirebaseFirestore.instance.collection('clubs').snapshots().map(
         (snapshot) => snapshot.docs
@@ -42,6 +70,13 @@ class FireStoreServicesx {
         .collection('clubs')
         .doc(club.clubId)
         .set(club.toMap());
+  }
+
+  static savePost(Post post) async {
+    return FirebaseFirestore.instance
+        .collection('Posts')
+        .doc(post.postId)
+        .set(post.toMap());
   }
 
 //Events
