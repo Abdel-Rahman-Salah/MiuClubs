@@ -11,7 +11,7 @@ class Timeline extends StatelessWidget {
           child: AppBar(
             centerTitle: true,
             title: const Text(
-              'MIU CLUBS',
+              'Timeline',
               style: TextStyle(color: Colors.red),
             ),
             backgroundColor: Colors.black,
@@ -54,7 +54,41 @@ class Timeline extends StatelessWidget {
                           ),
                         ),
                       ],
+
+                      //2nd event
                     ),
+                    Row(
+                      children: [
+                        Text(
+                          "26/1/2022",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.red,
+                          ),
+                        ),
+                        Flexible(
+                          child: Image.asset(
+                            'assets/images/party.png',
+                            height: 150,
+                            width: 150,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: (MediaQuery.of(context).size.width) / 2),
+                            width: 1.5,
+                            height: 100,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    )
                   ])),
         ));
   }
