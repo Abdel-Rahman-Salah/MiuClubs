@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nayraa/gallery.dart';
+//import 'package:nayraa/gallery.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class Gallery extends StatelessWidget {
@@ -28,7 +28,7 @@ class Gallery extends StatelessWidget {
         child: AppBar(
           centerTitle: true,
           title: const Text(
-            'MIU CLUBS',
+            'Gallery',
             style: TextStyle(color: Colors.red),
           ),
           backgroundColor: Colors.black,
@@ -37,7 +37,7 @@ class Gallery extends StatelessWidget {
       body: Container(
           child: GridView.builder(
         padding: EdgeInsets.all(12.0),
-        itemCount: 9,
+        itemCount: 12,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, crossAxisSpacing: 4.0, mainAxisSpacing: 6.0),
         itemBuilder: (BuildContext context, int index) {
