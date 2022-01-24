@@ -18,78 +18,112 @@ class Timeline extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: Container(
-              margin: EdgeInsets.all(8.0),
+            child: Container(
+          margin: EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "23/1/2022",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red,
-                          ),
-                        ),
-                        Flexible(
-                          child: Image.asset(
-                            'assets/images/e.jpg',
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
+                Row(
+                  children: [
+                    Text(
+                      "23/1/2022",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.red,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                left: (MediaQuery.of(context).size.width) / 2),
-                            width: 1.5,
-                            height: 100,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
+                    Flexible(
+                      child: Image.asset(
+                        'assets/images/e.jpg',
+                        height: 150,
+                        width: 150,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: (MediaQuery.of(context).size.width) / 2),
+                        width: 1.5,
+                        height: 100,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
 
-                      //2nd event
+                  //2nd event
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "26/1/2022",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.red,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          "26/1/2022",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red,
-                          ),
-                        ),
-                        Flexible(
-                          child: Image.asset(
-                            'assets/images/party.png',
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
+                    Flexible(
+                      child: Image.asset(
+                        'assets/images/party.png',
+                        height: 150,
+                        width: 150,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                left: (MediaQuery.of(context).size.width) / 2),
-                            width: 1.5,
-                            height: 100,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    )
-                  ])),
-        ));
+                  ],
+                ),
+                Row(
+                  children: [
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: (MediaQuery.of(context).size.width) / 2),
+                        width: 1.5,
+                        height: 100,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                //3rd event
+                Row(
+                  children: [
+                    Text(
+                      "30/1/2022",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.red,
+                      ),
+                    ),
+                    Flexible(
+                      child: Image.asset(
+                        'assets/images/people.jpg',
+                        height: 150,
+                        width: 150,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: (MediaQuery.of(context).size.width) / 2),
+                        width: 1.5,
+                        height: 100,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                )
+              ])),
+        )));
   }
 }
